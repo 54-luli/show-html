@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-01 上午盘行情分析</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Subsection title */
+.subsection-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 20px 0 12px;
+}
+.subsection-title-first {
+  margin-top: 0;
+}
+
+/* Link style */
+a {
+  color: #667eea;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Ordered list in card */
+.card-list {
+  list-style: none;
+  counter-reset: card-counter;
+}
+.card-list li {
+  counter-increment: card-counter;
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.6;
+}
+.card-list li:last-child {
+  margin-bottom: 0;
+}
+.card-list li::before {
+  content: counter(card-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #667eea;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 20px;
+}
+
+/* Info list */
+.info-list {
+  list-style: none;
+}
+.info-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #555555;
+  line-height: 1.6;
+}
+.info-list li:last-child {
+  border-bottom: none;
+}
+.info-list li strong {
+  color: #111111;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-01 · 上午盘行情分析</span>
+    <h1 class="cover-title">五一假期复盘：<br>科技主线引领A股四月收官</h1>
+    <p class="cover-subtitle">创业板指四月涨15.45%创十年新高，寒武纪市值突破7000亿元成新晋"股王"，AI算力/半导体/新能源为绝对主线。</p>
+    <div class="tag-row">
+      <span class="tag">A股休市至5月5日</span>
+      <span class="tag">科创50单日+4.71%</span>
+      <span class="tag">美股纳指创新高</span>
+    </div>
+  </div>
+
+  <!-- 核心结论 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">上午盘核心结论</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">A股五一假期休市安排</div>
+      <div class="card-text">A股五一劳动节假期休市（5月1日至5月5日），5月6日（周三）起恢复正常交易。今日为假日前最后一个交易日（4月30日）的复盘与假期消息面梳理。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">四月A股大幅收涨</div>
+      <div class="card-text">创业板指单月+15.45%创十年新高，科创50指数4月30日单日暴涨4.71%，AI算力/半导体/新能源为绝对主线，寒武纪市值突破7000亿元成新晋"股王"。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">五月宏观环境</div>
+      <div class="card-text">国内制造业PMI维持扩张区间（4月50.3），美国核心PCE通胀回落至3.2%缓解压力，中东地缘局势持续扰动全球市场，美股纳指/标普500创新高提供情绪支撑。</div>
+    </div>
+  </div>
+
+  <!-- jin10 行情与快讯 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">jin10 行情与快讯</h2>
+    </div>
+
+    <h3 class="subsection-title subsection-title-first">实时市场核心数据</h3>
+    <div class="card mb-12">
+      <div class="card-title">今日市场概况</div>
+      <div class="card-text">今日（5月1日）全球主要市场因五一假期大量休市，以下为4月30日收盘/盘后关键数据。</div>
+    </div>
+
+    <h3 class="subsection-title">国际大宗商品（4月30日收盘参考）</h3>
+    <div class="card mb-12">
+      <div class="card-text">
+        <strong>来源：jin10、金十数据</strong><br><br>
+        <strong>黄金：</strong>维持高位，中东地缘风险+全球央行购金需求支撑<br>
+        <strong>原油（WTI/布伦特）：</strong>中东霍尔木兹海峡局势持续紧张，供给扰动预期支撑油价高位震荡<br>
+        <strong>美元指数：</strong>美联储按兵不动，利率维持3.5%-3.75%，美指在99-100区间波动；日元因干预预期大幅波动，周四一度暴涨3%后回落
+      </div>
+    </div>
+    <div class="note">来源：jin10财经日历、华尔街见闻</div>
+
+    <h3 class="subsection-title">美股表现（4月30日收盘，北京时间5月1日凌晨）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>表现</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>道琼斯指数</td><td>单日大涨约790点（+1.87%）</td></tr>
+          <tr><td>纳斯达克指数</td><td class="good">涨0.89%，标普500指数创历史新高</td></tr>
+          <tr><td>4月整体</td><td>道指累涨7.14%，纳指累涨15.29%，标普500累涨10.36%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">来源：今日头条/华尔街见闻 5月1日早报</div>
+
+    <h3 class="subsection-title">jin10 盘中重要资讯（按时间倒序，筛选5月1日）</h3>
+    <div class="note" style="margin-bottom: 16px;">来源：jin10快讯，<a href="https://flash.jin10.com" target="_blank">https://flash.jin10.com</a></div>
+
+    <div class="list-item">
+      <div class="list-title">1. 摩尔线程完成DeepSeek-V4全链路工程化适配（11:32）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501103248247800" target="_blank">https://flash.jin10.com/detail/20260501103248247800</a><br>依托旗舰AI训推一体智算卡MTTS5000与自研MUSA软件栈，基于SGLang开源推理框架完成DeepSeek-V4完整运行验证</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">2. 中上协：全市场2025年合计分红2.43万亿元，较上年增加805亿元（10:58）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501105848199800" target="_blank">https://flash.jin10.com/detail/20260501105848199800</a><br>全市场3711家上市公司公布现金分红方案，平均股利支付率37.7%<br>2500余家公司股利支付率超30%，1052家公司实施一年多次分红<br>287家公司分红总额超10亿元</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">3. 鸿蒙智行4月交付32,759台，同比增长18.9%，1-4月累计同比增长36%（10:56）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501105618673800" target="_blank">https://flash.jin10.com/detail/20260501105618673800</a></div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">4. 日元干预效果"难以为继"，日本官员含蓄警告或再度干预（11:32）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501113238361800" target="_blank">https://flash.jin10.com/detail/20260501113238361800</a><br>日本财务省在周四买入日元/卖出美元干预，一度推动日元暴涨3%<br>涨势迅速消退，周五日元再度小幅走弱，当局可能再度入市干预<br>美国经济部门已知悉此次干预行动</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">5. 美伊冲突僵局未解，美国3月PCE物价指数创近三年新高（10:43）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501104311028800" target="_blank">https://flash.jin10.com/detail/20260501104311028800</a><br>美国3月核心PCE：3.2%（前值3.7%，预期3.8%），通胀压力有所缓解但仍处高位<br>高通胀开始显现，美国后半年降息预期降温</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">6. 美国银行上调铝、锌价格预测（11:06）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501110659372800" target="_blank">https://flash.jin10.com/detail/20260501110659372800</a><br>将铝目标价4000美元/吨提前至2026年Q4（此前预期2027年Q2）<br>将2026年锌价均价预测上调13%至3309美元/吨<br>理由：中东地区冶炼厂受损，部分市场供应偏紧</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">7. 何立峰会见比利时副首相，中比建交55周年（11:07）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501110759945800" target="_blank">https://flash.jin10.com/detail/20260501110759945800</a></div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">8. 日本东京电子等科技股提振日股（10:24）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501102450342800" target="_blank">https://flash.jin10.com/detail/20260501102450342800</a><br>东京电子公布半年净利润预计增长36%，股价大涨7.9%<br>日经225指数4月累涨16%，创去年10月以来最大单月涨幅</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">9. 美国中央司令部指挥官向特朗普简报针对伊朗军事行动新计划（10:38）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501103800548800" target="_blank">https://flash.jin10.com/detail/20260501103800548800</a></div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">10. 伊朗外长："制止以色列侵略黎巴嫩"是伊美停火方案组成部分（10:34）</div>
+      <div class="list-desc"><a href="https://flash.jin10.com/detail/20260501103453601800" target="_blank">https://flash.jin10.com/detail/20260501103453601800</a></div>
+    </div>
+  </div>
+
+  <!-- mx-data / mx-search 行情与资讯 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">mx-data / mx-search 行情与资讯</h2>
+    </div>
+
+    <h3 class="subsection-title subsection-title-first">mx-data 实时指数（2026年4月30日收盘，数据来源：东方财富）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>收盘点位</th><th>4月涨跌</th><th>成交额</th><th>上涨家数</th><th>下跌家数</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上证指数</td><td>4112.16</td><td class="good">+5.66%</td><td>约2.74万亿</td><td>1108</td><td>1069</td></tr>
+          <tr><td>深证成指</td><td>—</td><td class="good">+12.09%</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>创业板指</td><td>—</td><td class="good">+15.45%</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>科创50</td><td>—</td><td class="good">+4.71%*</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>上证50</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">*注：科创50为4月30日单日涨幅。4月创业板指涨15.45%创十年新高，深证成指涨12.09%。</div>
+
+    <h3 class="subsection-title">资金流向（4月30日超大单/大单）</h3>
+    <div class="card mb-12">
+      <div class="card-text">
+        <strong>超大单净流出：</strong>约166亿元<br>
+        <strong>大单净流出：</strong>约166亿元（中单净流入约42亿元，小单净流入约239亿元）<br>
+        <strong>整体：</strong>机构超大单/大单偏谨慎，中小单逆势买入，反映节前机构避险情绪
+      </div>
+    </div>
+    <div class="note">来源：mx-data（东方财富），查询时间2026-05-01 11:50</div>
+
+    <h3 class="subsection-title">mx-search 核心赛道景气度验证</h3>
+    <div class="note" style="margin-bottom: 16px;">来源：mx-search（东方财富）、jin10快讯整理</div>
+
+    <div class="card card-accent mb-12">
+      <div class="card-title">1. AI算力/半导体赛道（景气度：极高）</div>
+      <div class="card-text">
+        <strong>寒武纪（688256）：</strong>4月30日涨停（+20%），股价逼近1700元/股，市值突破7000亿元。Q1净利润10.13亿元，同比+185.04%。4月月内涨幅超70%，年内涨幅超25%，超越源杰科技成为A股新晋"股王"。<br><br>
+        <strong>芯原股份：</strong>4月30日20cm涨停，1月1日至4月29日新签订单金额提升至82.40亿元，AI算力相关订单占比超九成。<br><br>
+        <strong>海光信息：</strong>4月30日涨超7%，AI芯片需求旺盛。<br><br>
+        <strong>摩尔线程-U（科创板）：</strong>Q1净利润2936万元，期内扭亏为盈。5月1日完成DeepSeek-V4全链路适配验证。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">2. 新能源/锂电赛道（景气度：显著回升）</div>
+      <div class="card-text">
+        <strong>碳酸锂期货：</strong>主力合约4月30日涨超5%，报189,200元/吨，价格持续反弹。<br><br>
+        <strong>天齐锂业（002466）：</strong>Q1净利润18.76亿元，同比+1699.12%。<br><br>
+        <strong>赣锋锂业（002460）：</strong>Q1净利润18.37亿元，同比+616.34%。<br><br>
+        <strong>盛新锂能（002240）：</strong>Q1净利润4.64亿元，同比+399.89%。<br><br>
+        <strong>湖南裕能：</strong>Q1净利润同比+1338%，碳酸锂价格上涨带动产品售价提升。<br><br>
+        <strong>德方纳米（300769）：</strong>4月30日涨超13%，Q1净利润同比大幅增长。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">3. 新能源汽车/智驾赛道（景气度：持续向好）</div>
+      <div class="card-text">
+        <strong>鸿蒙智行：</strong>4月交付32,759台，1-4月累计同比+36%。<br><br>
+        <strong>比亚迪（002594/1211.HK）：</strong>Q1归母净利润40.85亿元（同比-55.38%受存储成本影响），天神之眼B激光版选装价格上涨至12,000元（从9900元上调），反映智驾配置价值认可度提升。<br><br>
+        <strong>宁德时代（300750）：</strong>4月市值首次突破2万亿元，跃居全市场第三位（仅次于农行、工行），北向资金连续9个季度增持，持股占流通A股比例从10.87%提升至17.88%。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">4. 机器人/工业自动化（景气度：持续升温）</div>
+      <div class="card-text">
+        <strong>创世纪（300083）：</strong>4月30日20cm涨停，机器人概念活跃。<br><br>
+        浙江荣泰、埃夫特、瑞可达等机器人产业链个股跟涨。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">5. 氦气/稀有气体（景气度：短期调整）</div>
+      <div class="card-text">
+        4月27-28日氦气概念大幅走强后，4月29-30日出现回调。<br><br>
+        <strong>金宏气体：</strong>4月29日最大跌幅超11%。<br><br>
+        <strong>中银证券观点：</strong>卡塔尔供应难恢复+俄罗斯出口管控，氦气价格或延续涨势，中期仍看好。
+      </div>
+    </div>
+  </div>
+
+  <!-- 4月30日走势复盘 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">4月30日（假日前最后交易日）走势复盘</h2>
+    </div>
+
+    <div class="card card-accent mb-12">
+      <div class="card-title">早盘（9:30~11:30）</div>
+      <div class="card-text">
+        <strong>开盘：</strong>沪指微跌0.01%，深证高开0.24%，创业板高开0.46%<br><br>
+        <strong>开盘热点：</strong>固态电池（CPO板块）、锂矿、刀片电池等新能源板块连日走强<br><br>
+        <strong>科创50逆势走强：</strong>盘中涨超5%，半导体全线爆发<br><br>
+        <strong>寒武纪早盘涨超9%：</strong>市值突破6700亿元，超越源杰科技成为"股王"<br><br>
+        <strong>中船系开盘拉升：</strong>中国船舶Q1净利润同比+251.64%<br><br>
+        <strong>保险股集体走强：</strong>新华保险Q1归母净利润同比+10.5%<br><br>
+        <strong>券商板块盘初活跃：</strong>财达证券Q1净利润同比+114.53%，长江证券涨停<br><br>
+        <strong>房地产开发板块震荡走高：</strong>深圳优化限购政策催化
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">午盘（11:30~15:00）</div>
+      <div class="card-text">
+        <strong>午后指数震荡走弱：</strong>科创50维持强势<br><br>
+        <strong>13:44 寒武纪触达20cm涨停：</strong>股价逼近1700元，市值突破7000亿<br><br>
+        <strong>14:07 宁德时代AH股均走弱：</strong>A股跌超1.7%，H股跌超3%<br><br>
+        <strong>尾盘指数小幅回升：</strong>沪指收涨0.11%<br><br>
+        <strong>全天成交额：</strong>约2.74万亿元（较前日放量约1508亿元）
+      </div>
+    </div>
+  </div>
+
+  <!-- 4月板块涨跌总览与驱动逻辑 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">4月板块涨跌总览与驱动逻辑</h2>
+    </div>
+
+    <h3 class="subsection-title subsection-title-first">领涨板块（4月收官强势方向）</h3>
+
+    <div class="card card-accent mb-12">
+      <div class="card-title">半导体/AI算力 — 驱动：中长期基本面+国产替代加速</div>
+      <div class="card-text">
+        <strong>代表个股：</strong>寒武纪（+25%年内）、芯原股份（4月30日涨停）、海光信息（+7%）、通富微电（Q1净利润+225%）<br><br>
+        <strong>逻辑：</strong>DeepSeek-V4全链路适配完成（摩尔线程），AI算力需求爆发，一季度多只AI芯片股净利润翻倍以上增长，国产替代加速验证
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">新能源/锂电 — 驱动：中长期景气回升+碳酸锂价格反弹</div>
+      <div class="card-text">
+        <strong>代表个股：</strong>天齐锂业（Q1 +1699%）、赣锋锂业（Q1 +616%）、德方纳米（+13%）、永兴材料（涨停）<br><br>
+        <strong>逻辑：</strong>碳酸锂期货价格持续反弹，新能源汽车产销数据向好（鸿蒙智行+36%），产业链补库预期
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">机器人/工业自动化 — 驱动：中长期政策+产业升级</div>
+      <div class="card-text">
+        <strong>代表个股：</strong>创世纪（20cm涨停）、绿的谐波、埃夫特<br><br>
+        <strong>逻辑：</strong>人形机器人产业化加速，AI赋能制造业升级，格力电器等巨头入局
+      </div>
+    </div>
+
+    <h3 class="subsection-title">领跌/调整板块</h3>
+
+    <div class="card mb-12">
+      <div class="card-title">氦气概念 — 调整：短期获利了结，中期逻辑未破</div>
+      <div class="card-text">
+        <strong>代表个股：</strong>金宏气体（4月29日跌超11%）、华特气体（4月29日跟跌）<br><br>
+        <strong>逻辑：</strong>连日大涨后获利盘集中出逃，但卡塔尔供应+俄罗斯管控的中期供给约束逻辑仍在
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">宁德时代 — 调整：配股融资压力，中长期竞争力无损</div>
+      <div class="card-text">
+        宁德时代拟在港股配股筹资约391亿港元，折让约7%<br><br>
+        Q1业绩受成本压力短期波动，但中期新能源电池龙头地位稳固
+      </div>
+    </div>
+  </div>
+
+  <!-- 重要个股公告/消息汇总 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">重要个股公告/消息汇总</h2>
+    </div>
+    <div class="note" style="margin-bottom: 16px;">来源：jin10快讯整理，发布时间2026年4月27日-5月1日</div>
+
+    <h3 class="subsection-title subsection-title-first">中长线逻辑强化</h3>
+    <div class="list-item">
+      <div class="list-title">格力电器（000651）</div>
+      <div class="list-desc">Q1净利润290.03亿元（同比-9.89%），拟以50亿-100亿元回购股份（>=70%注销）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">中国船舶（600150）</div>
+      <div class="list-desc">Q1净利润48.32亿元，同比+251.64%，民船量价齐升</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">中金公司</div>
+      <div class="list-desc">Q1净利润同比+75.19%，受益资本市场活跃</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">药明康德（603259）</div>
+      <div class="list-desc">Q1净利润同比+26.68%，H股绩后涨停</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">摩尔线程-U</div>
+      <div class="list-desc">Q1净利润2936万元扭亏为盈，完成DeepSeek-V4适配</div>
+    </div>
+
+    <h3 class="subsection-title">需关注风险点</h3>
+    <div class="list-item">
+      <div class="list-title">闻泰科技（600745）</div>
+      <div class="list-desc">股票被实施退市风险警示（*ST闻泰），Q1亏损1.89亿元</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">亚士创能</div>
+      <div class="list-desc">5月6日起*ST亚士（退市风险警示）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">恒力石化</div>
+      <div class="list-desc">重要子公司被美国财政部列入SDN清单</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">五粮液（000858）</div>
+      <div class="list-desc">延期披露2025年报及2026一季报</div>
+    </div>
+  </div>
+
+  <!-- 中长线展望：节后核心观察点 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2 class="section-title">中长线展望：节后核心观察点</h2>
+    </div>
+
+    <div class="card card-accent mb-12">
+      <div class="card-title">1. AI算力与半导体（最强主线，持续强化）</div>
+      <div class="card-text">
+        摩尔线程完成DeepSeek-V4适配，国产AI算力生态持续完善<br><br>
+        寒武纪Q1净利润+185%，股价4月累涨超70%，成新晋"股王"<br><br>
+        <strong>跟踪：</strong>DeepSeek-V4正式发布后的企业端部署节奏、昇腾950量产时间线
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">2. 新能源/锂电（景气回升，需跟踪价格）</div>
+      <div class="card-text">
+        碳酸锂价格从低位持续反弹（4月30日期货涨超5%至189,200元/吨）<br><br>
+        多只锂矿股Q1净利润同比增长1000%以上<br><br>
+        <strong>跟踪：</strong>碳酸锂现货价格能否持续站上18-20万/吨区间，新能源车产销数据
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">3. 制造业PMI与内需修复</div>
+      <div class="card-text">
+        4月制造业PMI 50.3（扩张但边际放缓），RatingDog PMI 52.2（连续5个月扩张）<br><br>
+        <strong>跟踪：</strong>5月PMI是否继续维持在荣枯线以上，Q2经济修复斜率
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">4. 地缘风险（最大外部不确定性）</div>
+      <div class="card-text">
+        中东霍尔木兹海峡局势持续紧张，美伊谈判僵局未解<br><br>
+        美国3月核心PCE 3.2%，通胀压力有所缓解但仍处高位<br><br>
+        <strong>跟踪：</strong>OPEC+ 6月产油政策会议（周日，5月待定），伊美谈判进展
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">5. 美股与外围市场（情绪锚）</div>
+      <div class="card-text">
+        美股纳指/标普500创新高，道指4月累涨7.14%，提供外部情绪支撑<br><br>
+        <strong>跟踪：</strong>5月1日晚间美国4月ISM制造业PMI（22:00公布）数据预期
+      </div>
+    </div>
+  </div>
+
+  <!-- 中长期风险提示 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">8</span>
+      <h2 class="section-title">中长期风险提示</h2>
+    </div>
+
+    <h3 class="subsection-title subsection-title-first">宏观层面</h3>
+    <div class="highlight-box">
+      <div class="highlight-text">美联储维持利率不变，降息预期降温，全球流动性环境边际收紧风险<br><br>中东地缘冲突持续扰动能源价格，输入性通胀风险若升温将对制造业形成压力</div>
+    </div>
+
+    <h3 class="subsection-title">产业层面</h3>
+    <div class="highlight-box">
+      <div class="highlight-text">AI算力/半导体板块4月涨幅巨大，节后若外围情绪波动或业绩不及预期，调整压力较大<br><br>新能源锂电反弹持续性依赖碳酸锂价格持续修复，若价格再度回落，赛道面临二次压力</div>
+    </div>
+
+    <h3 class="subsection-title">资金层面</h3>
+    <div class="highlight-box">
+      <div class="highlight-text">4月30日超大单/大单净流出（机构节前避险），节后增量资金能否持续入场是关键变量<br><br>北向资金在A股休市期间正常交易（港股5月1日休市），5月6日恢复，需关注节后首日北向流向</div>
+    </div>
+
+    <h3 class="subsection-title">退市/风险警示密集期</h3>
+    <div class="highlight-box">
+      <div class="highlight-text">5月6日起多个股票集中实施退市风险警示（*ST亚士、*ST国中、*ST航图等），投资者需规避基本面恶化个股</div>
+    </div>
+  </div>
+
+  <!-- 今日宏观日历重点关注 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">9</span>
+      <h2 class="section-title">今日宏观日历重点关注（5月1日北京时间）</h2>
+    </div>
+    <div class="note" style="margin-bottom: 16px;">来源：jin10财经日历</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>时间</th><th>事件</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>21:45</td><td>美国4月标普全球制造业PMI终值（预期54，前值54）</td></tr>
+          <tr><td>22:00</td><td>美国4月ISM制造业PMI（预期53，前值52.7）</td></tr>
+          <tr><td>周六（5月2日）01:00</td><td>伯克希尔哈撒韦股东大会（后巴菲特时代首秀）</td></tr>
+          <tr><td>周日（5月待定）</td><td>OPEC+围绕6月产油政策举行会议</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">市场有风险，投资需谨慎。本报告仅供信息整理，不构成任何投资建议。</div>
+    <div class="footer-path">任务详细执行日志：C:\Users\A\.openclaw\workspace-stock\logs\2026-05-01\Task3_2026-05-01_11-50_stock-agent_detail.log</div>
+    <div class="footer-path">报告生成时间：2026-05-01 11:52（Asia/Shanghai）</div>
+  </div>
+
+</div>
+</body>
+</html>

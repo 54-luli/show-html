@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-01 晚间财经资讯汇总</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Category header */
+.category-header {
+  font-size: 18px;
+  font-weight: 700;
+  color: #667eea;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #667eea;
+}
+
+/* Subsection */
+.subsection-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 20px 0 12px;
+}
+
+/* Source link */
+.source-link {
+  font-size: 12px;
+  color: #667eea;
+  text-decoration: none;
+}
+.source-link:hover {
+  text-decoration: underline;
+}
+
+/* News item */
+.news-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.news-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 6px;
+}
+.news-content {
+  font-size: 13px;
+  color: #555555;
+  line-height: 1.6;
+}
+.news-source {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 6px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-01 · 晚间财经资讯汇总</span>
+    <h1 class="cover-title">晚间财经资讯<br>核心摘要</h1>
+    <p class="cover-subtitle">美伊战争持续63天，A股4月收官创业板指创十年新高，美联储维持利率不变创1992年以来最多分歧。</p>
+    <div class="tag-row">
+      <span class="tag">霍尔木兹危机</span>
+      <span class="tag">科创50月涨25%</span>
+      <span class="tag">美联储鹰派</span>
+    </div>
+  </div>
+
+  <!-- 核心摘要 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">核心摘要</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">美伊局势</div>
+      <div class="card-text">美伊战争持续63天，霍尔木兹海峡封锁引发全球能源危机，布伦特原油暴跌至107美元，伊朗通过巴基斯坦提交新提议，和谈前景略有改善。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">A股4月收官</div>
+      <div class="card-text">创业板指创十年新高，科创50月涨25%，寒武纪涨73%重回股王。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">美联储决议</div>
+      <div class="card-text">美联储维持利率3.50%-3.75%不变，4票反对创1992年以来最多分歧，年内降息概率极低。</div>
+    </div>
+  </div>
+
+  <!-- 财经类 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">【财经类】（jin10 / mx-data / mx-search）</h2>
+    </div>
+
+    <h3 class="subsection-title">jin10 核心行情与资讯</h3>
+    <h4 class="category-header">全球核心资产收盘数据</h4>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>品种</th><th>最新价</th><th>涨跌幅</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>现货黄金 XAUUSD</td><td>4635.45美元/盎司</td><td class="good">+0.30%</td><td>震荡上行</td></tr>
+          <tr><td>WTI原油 USOIL</td><td>102.20美元/桶</td><td class="bad">-4.49%</td><td>大幅下跌</td></tr>
+          <tr><td>布伦特原油 UKOIL</td><td>107美元/桶</td><td class="bad">-2.83%</td><td>触及107美元</td></tr>
+          <tr><td>欧元/美元 EURUSD</td><td>1.17735</td><td class="good">+0.37%</td><td>小幅走强</td></tr>
+          <tr><td>美元/日元 USDJPY</td><td>156.416</td><td class="bad">-0.09%</td><td>窄幅震荡</td></tr>
+          <tr><td>恐慌指数 VIX</td><td>16.72</td><td>—</td><td>两个多月最低</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">要点：原油价格大幅下跌，WTI原油暴跌4.49%至102美元，布伦特触及107美元。现货黄金震荡上行至4635美元。恐慌指数VIX跌至两个多月最低水平，显示市场风险偏好有所回升。</div>
+
+    <h4 class="category-header">当周重要财经日历</h4>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>事件</th><th>公布时间</th><th>预期/实际</th><th>影响</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>美国4月ISM制造业PMI</td><td>5月1日22:00</td><td>待公布</td><td>中等</td></tr>
+          <tr><td>美国4月标普全球制造业PMI终值</td><td>5月1日21:45</td><td class="good">54.5（预期54）</td><td>利好</td></tr>
+          <tr><td>加拿大4月制造业PMI</td><td>5月1日21:30</td><td class="good">53.3（前值50）</td><td>利好</td></tr>
+          <tr><td>德国5月Gfk消费者信心指数</td><td>4月27日</td><td class="bad">-33.3（预期-29.3）</td><td>利空</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">重点关注：美国4月ISM制造业PMI即将公布，市场预期50左右，若超预期可能强化美联储维持高利率立场。</div>
+
+    <h4 class="category-header">jin10 核心快讯整理（15:00~22:00）</h4>
+
+    <div class="card card-accent">
+      <div class="card-title">霍尔木兹危机动态</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 伊朗外长向地区各国通报结束战争立场（21:56）</div>
+      <div class="news-content">伊朗伊斯兰共和国通讯社报道，伊朗外长阿拉格齐向地区各国外长通报了伊朗关于结束战争的立场。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501215621948800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 巴基斯坦确认伊朗已作出回应，对达成协议前景表示乐观（21:39）</div>
+      <div class="news-content">巴基斯坦官员表示，伊朗就美国提出的和平协议条款所作出的最新回应已送达美国官员。伊朗此前的提议曾试图将核问题讨论推迟，遭特朗普拒绝；新提议同意举行第二轮直接和平谈判。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501213914068800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. 美国修正提案曝光，要求将核问题重新纳入协议（21:43）</div>
+      <div class="news-content">白宫特使威特科夫发送修正案清单，重点是将核问题重新纳入草案文本。要求伊朗承诺不将浓缩铀移出遭轰炸的核设施，不恢复核设施活动。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501214350538800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">4. 埃克森美孚CEO：霍尔木兹海峡重新开放后需1-2个月恢复正常航运（21:51）</div>
+      <div class="news-content">一旦海峡重新开放，中东停产设施可相对较快恢复生产。受损的卡塔尔液化天然气生产线需更长时间恢复。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501215052873800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">美联储动态</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">5. 美联储卡什卡利：若通胀预期失去锚定，将需加息（20:10）</div>
+      <div class="news-content">在FOMC会议上持不同意见，因霍尔木兹海峡不确定性意味着美联储应在声明中承认加息风险。美联储应表明下一步行动可能是加息或降息。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501201041278800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">6. 美联储哈玛克：通胀压力广泛，能源推高价格（20:02）</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501200253877800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">市场动态</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">7. 美股开盘道指涨0.36%，标普500涨0.4%，纳指涨0.3%（21:30）</div>
+      <div class="news-content">苹果涨2.7%，埃克森美孚和雪佛龙分别跌1.1%和1.2%。闪迪跌2.7%、西部数据跌6%，业绩指引不够惊艳。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501213030825800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">8. 芝加哥期权交易所CBOE涨超8%（21:34）</div>
+      <div class="news-content">第一季度利润上涨，公司计划裁员20%。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501213456837800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">9. 费城半导体指数跌近1%（21:33）</div>
+      <div class="news-content">英伟达涨1.67%，台积电跌0.82%，博通跌0.29%，美光跌0.6%。</div>
+      <div class="news-source">来源：<a href="https://flash.jin10.com/detail/20260501213326900800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <h3 class="subsection-title">mx-data / mx-search 行情与公告</h3>
+    <h4 class="category-header">mx-data 核心数据：A股收盘指数（4月30日）</h4>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>收盘点位</th><th>日涨跌幅</th><th>4月全月涨幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上证指数</td><td>4112.16</td><td class="good">+0.11%</td><td class="good">+5.66%</td></tr>
+          <tr><td>深证成指</td><td>15107.55</td><td class="bad">-0.09%</td><td class="good">+12.09%</td></tr>
+          <tr><td>创业板指</td><td>3677.15</td><td class="bad">-0.27%</td><td class="good">+15.45%（十年新高）</td></tr>
+          <tr><td>科创50</td><td>1571.07</td><td class="good">+5.19%</td><td class="good">+25%+（全月）</td></tr>
+          <tr><td>沪深300</td><td>4807.31</td><td class="bad">-0.06%</td><td class="good">+2.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">要点：A股4月完美收官，创业板指刷新十年新高，科创50单日大涨5.19%，全月累计涨幅超25%。上证指数全月涨5.66%，深证成指涨12.09%。</div>
+
+    <h4 class="category-header">mx-search 重要公告（按影响程度排序）</h4>
+
+    <div class="card card-accent">
+      <div class="card-title">重大事项</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 国泰海通资管完成行业首例吸收合并交割</div>
+      <div class="news-content">4月30日，国泰海通资管与海通资管签署交割协议，海通资管全部资产、负债、业务、人员及资质由国泰海通资管依法承继。合并覆盖前中后台全环节，近4000只产品估值清算平稳运行，30万笔指令精准结算。截至2025年末，合并后资管规模达7507亿元，行业第二；公募规模超1100亿元，营收23亿元稳居第一。</div>
+      <div class="news-source">中长期影响：证券行业并购重组标杆案例，为行业整合提供可借鉴路径</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 沪市主板2025年初至2026年Q1新增资产重组交易近900单</div>
+      <div class="news-content">金额接近万亿元规模，重大资产重组新增披露72单，交易规模超3000亿元。标志性案例：浙江沪杭甬拟吸并镇洋发展，紫金矿业持续并购关键矿产资源，中国神华购买1336亿煤炭电力资产完成交割。</div>
+      <div class="news-source">中长期影响：并购重组政策持续发力，产业整合加速，优质资产注入提升上市公司质量</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. 邮储银行完成吸收合并全资子公司邮惠万家银行</div>
+      <div class="news-content">邮惠万家银行注销企业登记手续已办理完毕，邮储银行已完成吸收合并后的工商变更登记。本次吸收合并有助于优化管理及业务架构，巩固数字化转型成效，提高运营效率。</div>
+      <div class="news-source">中长期影响：银行系子公司整合加速，数字化转型成效显现</div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">业绩相关</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">4. 中芯国际：上交所并购重组审核委员会定于5月11日审议发行股份购买资产事项</div>
+      <div class="news-content">公司拟向国家集成电路产业投资基金等发行股份购买中芯北方49%股权。</div>
+      <div class="news-source">中长期影响：国产半导体产业链整合加速，中芯国际产能扩张确定性增强</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">5. 宝丰能源：今年以来产品出口量同比大幅增加</div>
+      <div class="news-content">一季度聚乙烯产品销售均价环比上涨1.2%，聚丙烯产品销售均价环比上涨6.2%。公司将持续深耕海外市场，稳步拓展国际业务。</div>
+      <div class="news-source">中长期影响：化工龙头企业全球化布局加速，出口增量贡献提升</div>
+    </div>
+  </div>
+
+  <!-- 新闻类 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">【新闻类】（newsnow / 60s-api / tavily-search / ai-news-collectors）</h2>
+    </div>
+
+    <h3 class="subsection-title">财经产业热榜（来源：60s-api / 百度热搜）</h3>
+
+    <div class="card card-accent">
+      <div class="card-title">宏观政策</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 统计局：4月制造业PMI 50.3%，非制造业PMI回落至49.4%</div>
+      <div class="news-content">制造业连续第二个月处于扩张区间，非制造业景气水平有所下降。</div>
+      <div class="news-source">中长期影响：经济复苏结构性分化，制造业韧性较强</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 央行：5月6日开展3000亿元3个月期买断式逆回购</div>
+      <div class="news-content">连续第3个月净回笼，节后首日直接落地超预期。</div>
+      <div class="news-source">中长期影响：流动性管理精准化，节后资金面预期改善</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. 广州楼市新政：公积金贷款最高至360万元</div>
+      <div class="news-content">"卖旧买新"最高领3万元补贴，适时试行现房销售。</div>
+      <div class="news-source">中长期影响：一线城市楼市政策持续松绑，购房成本降低</div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">产业动态</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">4. A股4月收官：创业板指刷新十年新高，科创50累计大涨25%</div>
+      <div class="news-content">寒武纪月内涨近73%重回A股股王。</div>
+      <div class="news-source">中长期影响：科技主线牛市格局强化，国产算力芯片产业链爆发</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">5. 全球科技巨头谷歌入驻广州珠江新城CBD</div>
+      <div class="news-content">预计今年三季度正式投入运营。</div>
+      <div class="news-source">中长期影响：外资科技巨头加速布局中国，粤港澳大湾区科技产业集群效应增强</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">6. 宇树发布双臂人形机器人，售价2.69万元起</div>
+      <div class="news-content">支持固定与移动两种方案，可快速部署服务、轻工业等场景。</div>
+      <div class="news-source">中长期影响：人形机器人量产时代开启，成本下探至万元级别</div>
+    </div>
+
+    <h3 class="subsection-title">AI与硬科技前沿（来源：tavily-search）</h3>
+
+    <div class="card card-accent">
+      <div class="card-title">AI大模型突破</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 中国大模型周调用量突破4.69万亿Token，连续两周超越美国</div>
+      <div class="news-content">全球TOP10模型中中国占据6席，彻底打破欧美垄断格局。MiniMax M2.5推理成本仅为GPT-4 Turbo的1/8，中文方言识别准确率98.2%。</div>
+      <div class="news-source">中长期影响：国产大模型从"参数内卷"转向"实用为王"，成本优势显著 | 来源：<a href="https://www.sohu.com/a/1011837758_128762" class="source-link">搜狐</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 智谱AI正式上线并开源GLM-5旗舰模型</div>
+      <div class="news-content">该模型即为此前在OpenRouter榜首引发热议的神秘模型"Pony Alpha"。在复杂逻辑推理和长文本处理上表现优异。</div>
+      <div class="news-source">中长期影响：国产开源大模型生态持续壮大 | 来源：<a href="https://zhuanlan.zhihu.com/p/2006304089840058657" class="source-link">知乎专栏</a></div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">半导体产业</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. 2026年半导体十大趋势：2nm工艺进入量产关键阶段</div>
+      <div class="news-content">台积电N2工艺晶体管密度成为行业标杆。英特尔18A工艺凭借GAAFET与BSPDN技术实现性能与能效双重突破。存算一体、Chiplet、CPO等前沿技术加速落地。</div>
+      <div class="news-source">中长期影响：先进工艺竞争白热化，国产替代窗口期收窄 | 来源：<a href="https://www.istis.sh.cn/cms/news/article/75/28061" class="source-link">上海情报服务平台</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">4. 全球半导体市场2025年预计突破6970亿美元</div>
+      <div class="news-content">AI相关逻辑芯片、GPGPU增速分别达16.8%和27%，成为最强增长引擎。</div>
+      <div class="news-source">中长期影响：AI算力需求持续引爆，半导体产业进入"黄金时代" | 来源：<a href="https://caifuhao.eastmoney.com/news/20260210183726156440740" class="source-link">东方财富</a></div>
+    </div>
+
+    <h3 class="subsection-title">全球宏观动态（来源：tavily-search / jin10）</h3>
+
+    <div class="card card-accent">
+      <div class="card-title">美伊局势</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 霍尔木兹海峡持续关闭，美伊和谈前景不明</div>
+      <div class="news-content">伊朗声称海峡仅对与以色列和美国有关的船只关闭。白宫消息人士称美国代表团即将前往巴基斯坦与伊朗进行新一轮和谈。伊朗通过巴基斯坦提交新提议，至少同意举行第二轮直接和平谈判。</div>
+      <div class="news-source">中长期影响：能源危机持续，若谈判重启则封锁有望缓和 | 来源：<a href="https://www.voachinese.com/a/fate-of-us-iran-peace-talks-uncertain-as-strait-of-hormuz-remains-closed-20260420/8139733.html" class="source-link">美国之音</a></div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 特朗普提出重新开放霍尔木兹海峡新计划</div>
+      <div class="news-content">美国将继续对伊朗港口实施封锁，同时与盟友协调加大对伊朗压力。特朗普称同伊朗的谈判正通过电话进行，伊方必须明确承诺彻底放弃核武器。</div>
+      <div class="news-source">中长期影响：美方强硬立场持续，但谈判窗口未关闭 | 来源：<a href="https://flash.jin10.com/detail/20260501203201767800" class="source-link">jin10快讯</a></div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">美联储政策</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. 美联储维持基准利率3.50%-3.75%不变</div>
+      <div class="news-content">4票反对创1992年以来最多分歧，3票反对纳入宽松倾向措辞，1票希望降息25BP。通胀表述从"略高"上调为"高企"，新增"全球能源价格影响"表述。CME美联储观察显示，6月维持利率不变概率95%，年内加息可能性大于降息。</div>
+      <div class="news-source">中长期影响：年内降息概率极低，流动性收紧对高估值资产形成压制 | 来源：<a href="https://finance.sina.cn/forex/whzx/2026-01-28/detail-inhivvyy4959322.d.html" class="source-link">新浪财经</a></div>
+    </div>
+  </div>
+
+  <!-- 联网补充 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">【联网补充】（来源：multi-search-engine / tavily-search）</h2>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-title">核心事件深度背景</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">1. 霍尔木兹危机背景</div>
+      <div class="news-content">2026年伊朗战争爆发后，伊朗伊斯兰革命卫队宣布武力封锁霍尔木兹海峡，导致全球能源市场重大冲击。该海峡是全球石油运输最关键通道，日均通过量占全球石油消费量约20%。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">2. 美联储内部分歧原因</div>
+      <div class="news-content">霍尔木兹海峡不确定性导致能源价格飙升，通胀压力加剧。部分票委认为应在声明中承认加息风险，而非仅保留降息选项。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title">3. A股4月大涨驱动因素</div>
+      <div class="news-content">国产算力芯片产业链爆发（寒武纪月涨73%），科创50指数受益于AI算力需求持续高增长。创业板指创十年新高，反映科技主线牛市格局强化。</div>
+    </div>
+  </div>
+
+  <!-- 中长期风险提示 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">【中长期风险提示】</h2>
+    </div>
+
+    <h3 class="subsection-title">宏观风险</h3>
+    <div class="highlight-box">
+      <div class="highlight-title">霍尔木兹危机持续</div>
+      <div class="highlight-text">若美军采取军事行动，油价将再度飙升，通胀压力卷土重来；若谈判重启，封锁缓和，能源压力缓解。当前伊朗已提交新提议，和谈前景略有改善但仍不明朗。</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">美联储鹰派转向</div>
+      <div class="highlight-text">4票反对显示内部分歧加大，年内降息概率极低，甚至存在加息可能。全球流动性预期收紧，A股外资持仓较高的科技板块面临阶段性压力。</div>
+    </div>
+
+    <h3 class="subsection-title">产业风险</h3>
+    <div class="highlight-box">
+      <div class="highlight-title">科技主线短期涨幅过快</div>
+      <div class="highlight-text">寒武纪4月累涨70%，获利盘压力累积，节后若量能不能有效放大需警惕高位回撤风险。</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">原油价格大幅波动</div>
+      <div class="highlight-text">WTI原油单日暴跌4.49%，布伦特触及107美元，能源板块面临不确定性加大。</div>
+    </div>
+
+    <h3 class="subsection-title">资金面风险</h3>
+    <div class="highlight-box">
+      <div class="highlight-title">五一假期外围市场不确定性</div>
+      <div class="highlight-text">A股5月1日-5日休市，期间外围市场波动可能影响节后开盘情绪。需关注美国ISM制造业PMI数据及美伊谈判进展。</div>
+    </div>
+  </div>
+
+  <!-- 数据来源说明 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">【数据来源说明】</h2>
+    </div>
+    <div class="list-item">
+      <div class="list-title">全球资讯</div>
+      <div class="list-desc">jin10（实时行情、快讯、财经日历）、tavily-search（全球宏观与产业新闻）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">A股数据</div>
+      <div class="list-desc">mx-data（收盘指数）、mx-search（晚间公告）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">热榜</div>
+      <div class="list-desc">60s-api（每日60秒新闻）、百度热搜</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">AI/半导体</div>
+      <div class="list-desc">tavily-search（AI大模型、半导体产业动态）</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">报告生成时间：2026-05-01 22:15（Asia/Shanghai）</div>
+    <div class="footer-path">数据覆盖：2026年4月30日收盘 ~ 5月1日晚间</div>
+    <div class="footer-path">Task5 | evening-financial-agent | 2026-05-01 22:15 CST</div>
+  </div>
+
+</div>
+</body>
+</html>
