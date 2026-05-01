@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>财经早盘新闻 | 2026年5月1日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fef7f3;
+  color: #3a1f18;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 810px;
+  margin: 0 auto;
+  background: #fef7f3;
+  min-height: 100vh;
+  position: relative;
+}
+.container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(45% 30% at 80% 10%, rgba(255,209,102,.35), transparent 70%),
+    radial-gradient(50% 35% at 10% 95%, rgba(255,107,139,.22), transparent 70%),
+    radial-gradient(40% 30% at 90% 85%, rgba(122,200,255,.18), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.slide {
+  position: relative;
+  width: 810px;
+  min-height: 1080px;
+  aspect-ratio: 3/4;
+  padding: 70px 64px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fef7f3;
+  margin: 20px auto;
+  z-index: 1;
+}
+.page-dot {
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  background: #3a1f18;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 2;
+}
+.sticker {
+  position: absolute;
+  padding: 10px 18px;
+  background: #fff;
+  border: 2.5px dashed #3a1f18;
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 18px;
+  color: #3a1f18;
+  transform: rotate(-3deg);
+  box-shadow: 4px 4px 0 #3a1f18;
+  z-index: 2;
+}
+.sticker.pink { background: #ffd3e0; }
+.sticker.yellow { background: #ffe788; }
+.sticker.blue { background: #cfeaff; }
+.sticker.green { background: #d4f2c8; }
+.sticker.orange { background: #ffd166; }
+.hand-box {
+  background: #fff;
+  border: 2.5px solid #3a1f18;
+  border-radius: 22px;
+  padding: 24px 28px;
+  box-shadow: 5px 5px 0 #3a1f18;
+  margin-bottom: 16px;
+}
+.h1 {
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #3a1f18;
+}
+.h2 {
+  font-size: 48px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: #3a1f18;
+  margin-bottom: 20px;
+}
+.h3 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #3a1f18;
+  margin-bottom: 16px;
+}
+.lede {
+  color: #6f4a3e;
+  font-size: 22px;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.big-emoji {
+  font-size: 140px;
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.num-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ff6b8b;
+  color: #fff;
+  font-weight: 900;
+  font-size: 32px;
+  border: 3px solid #3a1f18;
+  box-shadow: 4px 4px 0 #3a1f18;
+  margin-bottom: 16px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.ht {
+  background: #fff;
+  color: #ff6b8b;
+  border: 2px solid #3a1f18;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+}
+.cover-title {
+  background: linear-gradient(180deg, transparent 60%, #ffd166 60%, #ffd166 92%, transparent 92%);
+  padding: 0 10px;
+}
+.bottom-bar {
+  position: absolute;
+  bottom: 40px;
+  left: 64px;
+  right: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #a68676;
+  font-family: 'JetBrains Mono', monospace;
+  z-index: 2;
+}
+.avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd3e0, #ffe5c7 50%, #d6f0ff);
+  border: 2.5px solid #3a1f18;
+  box-shadow: 3px 3px 0 #3a1f18;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 20px;
+  color: #3a1f18;
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #3a1f18;
+}
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #f0eae2;
+}
+th {
+  background: #ffd166;
+  font-weight: 700;
+  color: #3a1f18;
+  font-size: 15px;
+}
+td {
+  color: #6f4a3e;
+  font-size: 14px;
+}
+.good { color: #7bc67b; font-weight: 700; }
+.bad { color: #ff6b6b; font-weight: 700; }
+.warn { color: #ffb547; font-weight: 700; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border: 2px solid #3a1f18;
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 4px 4px 0 #3a1f18;
+}
+.card-accent {
+  background: linear-gradient(135deg, #ffd3e0, #ffe5c7);
+  border-color: #3a1f18;
+}
+.card-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #3a1f18;
+  margin-bottom: 10px;
+}
+.card-text {
+  font-size: 16px;
+  color: #6f4a3e;
+  line-height: 1.6;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 5px solid #ff6b8b;
+  padding: 18px 22px;
+  border-radius: 0 16px 16px 0;
+  margin: 16px 0;
+  border: 2px solid #3a1f18;
+  border-left: 5px solid #ff6b8b;
+}
+.highlight-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 15px;
+  color: #7c2d12;
+  line-height: 1.6;
+}
+
+/* List */
+.list-item {
+  padding: 14px 0;
+  border-bottom: 2px dashed #f0eae2;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3a1f18;
+  margin-bottom: 6px;
+}
+.list-desc {
+  font-size: 15px;
+  color: #6f4a3e;
+  line-height: 1.5;
+}
+
+/* Note */
+.note {
+  font-size: 14px;
+  color: #a68676;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #ffd166;
+  line-height: 1.5;
+}
+
+/* Text utilities */
+.tc { text-align: center; }
+.mt-s { margin-top: 12px; }
+.mt-m { margin-top: 20px; }
+.mt-l { margin-top: 32px; }
+.mb-s { margin-bottom: 12px; }
+.mb-m { margin-bottom: 20px; }
+.text-sm { font-size: 14px; }
+.text-dim { color: #a68676; }
+.text-bold { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Slide 1: Cover -->
+  <section class="slide">
+    <div class="page-dot">1 / 12</div>
+    <div class="sticker pink" style="top:120px;left:48px;transform:rotate(-6deg)">📊 财经早盘</div>
+    <div class="sticker yellow" style="top:140px;right:64px;transform:rotate(5deg)">2026-05-01</div>
+    <div style="margin-top:200px">
+      <p class="lede" style="font-size:22px;font-weight:700">A股休市中 · 5月6日复市</p>
+      <h1 class="h1 mt-s">财经早盘新闻<br><span class="cover-title">2026年5月1日</span></h1>
+    </div>
+    <div class="tag-row" style="margin-top:36px">
+      <span class="ht">#美联储决议</span>
+      <span class="ht">#中东局势</span>
+      <span class="ht">#A股休市</span>
+      <span class="ht">#黄金原油</span>
+    </div>
+    <div class="bottom-bar">
+      <div><span class="avatar">财</span> <b style="color:#3a1f18;margin-left:8px">@财经早盘</b></div>
+      <div>← 左滑查看</div>
+    </div>
+  </section>
+
+  <!-- Slide 2: 风险提示 -->
+  <section class="slide">
+    <div class="page-dot">2 / 12</div>
+    <div class="big-emoji">⚠️</div>
+    <h2 class="h2 tc">风险提示</h2>
+    <div class="hand-box mt-l">
+      <p style="font-size:20px;margin:0;color:#6f4a3e;line-height:1.7">
+        <b style="color:#ff6b8b">数据时间：</b>2026-05-01 09:00（北京时间）<br><br>
+        <b style="color:#ff6b8b">风险提示：</b>市场有风险，投资需谨慎；本文不构成任何投资建议。
+      </p>
+    </div>
+    <div class="sticker orange" style="bottom:180px;right:60px;transform:rotate(8deg)">仅供参考</div>
+  </section>
+
+  <!-- Slide 3: 全球主要资产行情 -->
+  <section class="slide">
+    <div class="page-dot">3 / 12</div>
+    <div class="num-circle" style="background:#ff6b8b">1</div>
+    <h2 class="h2 mt-m">全球主要资产行情</h2>
+    <div class="table-wrap mt-m">
+      <table>
+        <thead>
+          <tr><th>品种</th><th>最新价</th><th>涨跌幅</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>现货黄金 XAUUSD</td><td>4617.43美元/盎司</td><td class="bad">-0.09%</td><td>略有回落</td></tr>
+          <tr><td>WTI原油 USOIL</td><td>107.26美元/桶</td><td class="good">+0.13%</td><td>高位运行</td></tr>
+          <tr><td>布伦特原油 UKOIL</td><td>110.63美元/桶</td><td class="good">+0.49%</td><td>持续攀高</td></tr>
+          <tr><td>欧元/美元 EURUSD</td><td>1.1726</td><td class="bad">-0.04%</td><td>小幅走弱</td></tr>
+          <tr><td>美元/人民币 USDCNH</td><td>6.8320</td><td class="good">+0.01%</td><td>窄幅震荡</td></tr>
+          <tr><td>标普500 SPX</td><td>7209.03</td><td class="good">+1.02%</td><td>反弹强劲</td></tr>
+          <tr><td>日经225</td><td>59378.35</td><td class="good">+0.16%</td><td>小幅高开</td></tr>
+          <tr><td>澳大利亚ASX200</td><td>8740.00</td><td class="good">+0.86%</td><td>开盘上涨</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">💡 要点</div>
+      <div class="highlight-text">中东霍尔木兹海峡封锁持续，布伦特原油站上110美元/桶，为能源板块提供支撑；美股在Alphabet暴涨10%带动下大幅反弹，标普500涨超1%。</div>
+    </div>
+  </section>
+
+  <!-- Slide 4: 美联储货币政策 -->
+  <section class="slide">
+    <div class="page-dot">4 / 12</div>
+    <div class="num-circle" style="background:#ffa94d">2</div>
+    <h2 class="h2 mt-m">美联储货币政策（最新）</h2>
+    <div class="card card-accent mt-m">
+      <div class="card-title">利率决议</div>
+      <div class="card-text">美联储维持联邦基金利率目标区间在3.50%-3.75%不变，<b style="color:#ff6b8b">符合预期</b></div>
+    </div>
+    <div class="card">
+      <div class="card-title">内部罕见分歧</div>
+      <div class="card-text">4名票委投票反对（3票反对纳入宽松倾向措辞，1票希望降息25BP），为<b style="color:#ff6b8b">1992年以来最多反对票</b>的会议</div>
+    </div>
+    <div class="card">
+      <div class="card-title">鲍威尔"最后一舞"</div>
+      <div class="card-text">确认卸任主席后将继续<b style="color:#ff6b8b">留任理事</b>，称因法律诉讼让其"别无选择"，承诺不当"影子主席"；并以俏皮话"下次见不到你们了"告别</div>
+    </div>
+    <div class="card">
+      <div class="card-title">通胀表述升级</div>
+      <div class="card-text">将通胀从"略高"上调为"<b style="color:#ff6b8b">高企</b>"，新增"全球能源价格影响"表述</div>
+    </div>
+  </section>
+
+  <!-- Slide 5: 降息预期 -->
+  <section class="slide">
+    <div class="page-dot">5 / 12</div>
+    <div class="sticker green" style="top:100px;right:48px;transform:rotate(4deg)">降息预期</div>
+    <h2 class="h2 mt-l">降息预期</h2>
+    <div class="hand-box mt-m">
+      <p style="font-size:20px;margin:0;color:#3a1f18;font-weight:700">CME美联储观察显示</p>
+      <p style="font-size:18px;margin:10px 0 0;color:#6f4a3e;line-height:1.7">
+        <b style="color:#ff6b8b">6月维持利率不变概率95%</b><br>
+        年内加息可能性大于降息
+      </p>
+    </div>
+    <div class="hand-box mt-m" style="background:#fff5ef">
+      <p style="font-size:20px;margin:0;color:#3a1f18;font-weight:700">机构最新观点</p>
+      <p style="font-size:16px;margin:10px 0 0;color:#6f4a3e;line-height:1.7">
+        • 摩根士丹利推迟降息预测至2027年<br>
+        • 中金预计下次降息推迟至Q4<br>
+        • 华泰证券认为降息门槛已提高
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 6: 地缘局势 -->
+  <section class="slide">
+    <div class="page-dot">6 / 12</div>
+    <div class="num-circle" style="background:#ffd166;color:#3a1f18">3</div>
+    <h2 class="h2 mt-m">地缘局势：美伊博弈持续升级</h2>
+    <div class="highlight-box mt-m">
+      <div class="highlight-title">特朗普政府官员</div>
+      <div class="highlight-text">基于《战争权力法》，2月28日以来的敌对行动已"终止"，但<b style="color:#ff6b8b">霍尔木兹海峡仍处于封锁状态</b></div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">特朗普最新表态</div>
+      <div class="highlight-text">可能需要<b style="color:#ff6b8b">打破伊朗停火协议</b>；与油气高管讨论将封锁持续数月；在核问题解决前不会解除封锁</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">伊朗强硬回应</div>
+      <div class="highlight-text">外交部发言人巴加埃表示——"期待谈判迅速达成结果<b style="color:#ff6b8b">并不现实</b>"，称47年积累了对美方深深的不信任；议会议员称"<b style="color:#ff6b8b">封锁即宣战</b>"，或以军事行动清除海上障碍</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">美军方案</div>
+      <div class="highlight-text">知情人士称中央司令部已准备"短促而强力"打击方案，另有一方案为<b style="color:#ff6b8b">控制霍尔木兹海峡部分海域恢复航运</b>，可能涉及地面部队</div>
+    </div>
+  </section>
+
+  <!-- Slide 7: 能源影响 -->
+  <section class="slide">
+    <div class="page-dot">7 / 12</div>
+    <div class="big-emoji">⛽</div>
+    <h2 class="h2 tc">能源影响</h2>
+    <div class="hand-box mt-l">
+      <p style="font-size:20px;margin:0;color:#3a1f18;font-weight:700">油价高位持续</p>
+      <p style="font-size:18px;margin:10px 0 0;color:#6f4a3e;line-height:1.7">
+        布伦特原油站上<b style="color:#ff6b8b">110美元+</b>，持续压制全球通胀预期
+      </p>
+    </div>
+    <div class="hand-box mt-m" style="background:#fff5ef">
+      <p style="font-size:20px;margin:0;color:#3a1f18;font-weight:700">亚太开发银行警告</p>
+      <p style="font-size:18px;margin:10px 0 0;color:#6f4a3e;line-height:1.7">
+        若能源持续中断，<b style="color:#ff6b8b">2026年亚太增长将放缓至4.7%</b>
+      </p>
+    </div>
+    <div class="sticker yellow" style="bottom:180px;right:60px;transform:rotate(8deg)">关注风险</div>
+  </section>
+
+  <!-- Slide 8: 中国宏观政策 -->
+  <section class="slide">
+    <div class="page-dot">8 / 12</div>
+    <div class="num-circle" style="background:#7bc67b">4</div>
+    <h2 class="h2 mt-m">中国宏观政策</h2>
+    <div class="card card-accent mt-m">
+      <div class="card-title">央行流动性</div>
+      <div class="card-text">将开展<b style="color:#ff6b8b">3000亿元3个月期买断式逆回购</b>，节后首日（5月6日）直接落地，超预期</div>
+    </div>
+    <div class="card">
+      <div class="card-title">科技创新金融支持</div>
+      <div class="card-text">央行、发改委、财政部联合印发《关于扩大科技创新和技术改造贷款投放的通知》，将研发投入较高的<b style="color:#ff6b8b">民营中小企业纳入支持</b>，AI、电子信息等<b style="color:#ff6b8b">14个领域</b>获重点支持</div>
+    </div>
+    <div class="card">
+      <div class="card-title">设备更新资金</div>
+      <div class="card-text">2026年<b style="color:#ff6b8b">第二批915亿元超长期特别国债</b>支持设备更新资金已下达</div>
+    </div>
+    <div class="card">
+      <div class="card-title">猪肉储备</div>
+      <div class="card-text">国家发改委等四部门将支持地方开展<b style="color:#ff6b8b">冻猪肉商业储备收储</b></div>
+    </div>
+  </section>
+
+  <!-- Slide 9: 深圳楼市 & 易会满 -->
+  <section class="slide">
+    <div class="page-dot">9 / 12</div>
+    <div class="card card-accent">
+      <div class="card-title">深圳楼市松绑</div>
+      <div class="card-text">公积金贷款最高额度提高至<b style="color:#ff6b8b">100万元</b>，进一步优化限购</div>
+    </div>
+    <div class="card mt-m">
+      <div class="card-title">易会满被双开</div>
+      <div class="card-text">十四届全国政协经济委员会原副主任易会满严重违纪违法被开除党籍和公职</div>
+    </div>
+    <div class="sticker pink" style="bottom:200px;left:50%;transform:translateX(-50%) rotate(-3deg)">政策动态</div>
+  </section>
+
+  <!-- Slide 10: A股市场动态 -->
+  <section class="slide">
+    <div class="page-dot">10 / 12</div>
+    <div class="num-circle" style="background:#ff6b8b">5</div>
+    <h2 class="h2 mt-m">A股市场动态（4月30日收盘）</h2>
+    <div class="table-wrap mt-m">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>4月累计涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上证指数</td><td>4112.16</td><td class="good">+0.11%</td><td class="good">+5.66%</td></tr>
+          <tr><td>深证成指</td><td>15107.55</td><td class="bad">-0.09%</td><td class="good">+12.09%</td></tr>
+          <tr><td>创业板指</td><td>3677.15</td><td class="bad">-0.27%</td><td class="good">+15.45% 🔥</td></tr>
+          <tr><td>科创50</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>沪深300</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">注：A股5月1日-5月5日劳动节休市，5月6日（周二）复市</div>
+  </section>
+
+  <!-- Slide 11: 板块资金动向 & 重大动态 -->
+  <section class="slide">
+    <div class="page-dot">11 / 12</div>
+    <h2 class="h2">板块资金动向（4月30日）</h2>
+    <div class="hand-box mt-m">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">主力净流入前三</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e;line-height:1.7">
+        • 电力设备（+120亿+）<br>
+        • 有色金属（+120亿+）<br>
+        • 储能/稀土永磁/固态电池：资金净流入居前<br>
+        • 锂电池产业链：爆发，多股涨停
+      </p>
+    </div>
+    <div class="hand-box mt-m" style="background:#fff5ef">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">融资余额</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e">4月30日较前一日增加约<b style="color:#ff6b8b">155亿元</b></p>
+    </div>
+    <h3 class="h3 mt-l">重大产业与公司动态</h3>
+    <div class="list-item">
+      <div class="list-title">1. Alphabet财报大超预期（4月30日凌晨）</div>
+      <div class="list-desc">Q1营收+22%至901亿美元，谷歌云+63%至200亿美元；净利润暴增81%，宣布700亿美元回购+5%股息上调；资本支出指引大幅上调至1800-1900亿美元；Alphabet暴涨10%，TPU8系列发布，中金继续看多光通信/存储/晶圆代工</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">2. 三星电子Q1营业利润同比+756%</div>
+      <div class="list-desc">创季度新高，芯片业务贡献主要收益</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">3. 宁德时代拟配售H股筹资约391.9亿港元</div>
+      <div class="list-desc">用于全球新能源项目建设</div>
+    </div>
+  </section>
+
+  <!-- Slide 12: 中长线展望 -->
+  <section class="slide">
+    <div class="page-dot">12 / 12</div>
+    <div class="big-emoji">🎯</div>
+    <h2 class="h2 tc">中长线展望</h2>
+    <p class="lede tc" style="font-weight:700;color:#ff6b8b">核心观察点</p>
+    <div class="hand-box mt-m">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">1. 霍尔木兹博弈走向</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e;line-height:1.6">若美军采取军事行动，油价将再度飙升，通胀压力卷土重来；若谈判重启，封锁缓和，能源压力缓解</p>
+    </div>
+    <div class="hand-box mt-m">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">2. 美联储利率路径</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e;line-height:1.6">年内降息概率极低，流动性收紧对高估值资产（科技股/黄金）的影响</p>
+    </div>
+    <div class="hand-box mt-m">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">3. 中国政策节奏</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e;line-height:1.6">节后3000亿逆回购落地，"六张网"+AI专项贷款加速，A股节后资金面预期改善</p>
+    </div>
+    <div class="hand-box mt-m" style="background:#fff5ef">
+      <p style="font-size:18px;margin:0;color:#3a1f18;font-weight:700">4. Alphabet资本开支扩张</p>
+      <p style="font-size:16px;margin:8px 0 0;color:#6f4a3e;line-height:1.6">算力需求长期牛市格局确立，但当前科技股估值偏高，需注意财报后的预期差</p>
+    </div>
+    <div class="tag-row" style="justify-content:center;margin-top:36px">
+      <span class="ht">#财经新闻</span>
+      <span class="ht">#早盘速递</span>
+      <span class="ht">#投资参考</span>
+    </div>
+    <div class="bottom-bar">
+      <div><span class="avatar">财</span> <b style="color:#3a1f18;margin-left:8px">@财经早盘</b></div>
+      <div>来源：jin10 MCP / mx-skills</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
