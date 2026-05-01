@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-01 财经早盘新闻</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Subsection */
+.subsection-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 20px 0 12px;
+  padding-left: 12px;
+  border-left: 3px solid #667eea;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Info box */
+.info-box {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left: 4px solid #3b82f6;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.info-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 8px;
+}
+.info-text {
+  font-size: 14px;
+  color: #1e3a8a;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Warning box */
+.warning-box {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-left: 4px solid #ef4444;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.warning-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #b91c1c;
+  margin-bottom: 8px;
+}
+.warning-text {
+  font-size: 14px;
+  color: #7f1d1d;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Number list */
+.num-list {
+  counter-reset: num-counter;
+  list-style: none;
+  padding: 0;
+}
+.num-list li {
+  counter-increment: num-counter;
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+}
+.num-list li::before {
+  content: counter(num-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #667eea;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-01 · 财经早盘新闻</span>
+    <h1 class="cover-title">财经早盘新闻<br>2026年5月1日（周五）</h1>
+    <p class="cover-subtitle">数据时间：2026-05-01 09:00（北京时间）| A股休市中（5月6日复市）</p>
+    <div class="tag-row">
+      <span class="tag">美联储维持利率不变</span>
+      <span class="tag">霍尔木兹海峡封锁持续</span>
+      <span class="tag">布伦特原油站上110美元</span>
+    </div>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="section">
+    <div class="warning-box">
+      <div class="warning-title">风险提示</div>
+      <div class="warning-text">市场有风险，投资需谨慎；本文不构成任何投资建议。</div>
+    </div>
+  </div>
+
+  <!-- 一、全球主要资产行情 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">全球主要资产行情</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>品种</th><th>最新价</th><th>涨跌幅</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>现货黄金 XAUUSD</td><td>4617.43美元/盎司</td><td class="bad">-0.09%</td><td>略有回落</td></tr>
+          <tr><td>WTI原油 USOIL</td><td>107.26美元/桶</td><td class="good">+0.13%</td><td>高位运行</td></tr>
+          <tr><td>布伦特原油 UKOIL</td><td>110.63美元/桶</td><td class="good">+0.49%</td><td>持续攀高</td></tr>
+          <tr><td>欧元/美元 EURUSD</td><td>1.1726</td><td class="bad">-0.04%</td><td>小幅走弱</td></tr>
+          <tr><td>美元/人民币 USDCNH</td><td>6.8320</td><td class="good">+0.01%</td><td>窄幅震荡</td></tr>
+          <tr><td>标普500 SPX</td><td>7209.03</td><td class="good">+1.02%</td><td>反弹强劲</td></tr>
+          <tr><td>日经225</td><td>59378.35</td><td class="good">+0.16%</td><td>小幅高开</td></tr>
+          <tr><td>澳大利亚ASX200</td><td>8740.00</td><td class="good">+0.86%</td><td>开盘上涨</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">要点</div>
+      <div class="card-text">中东霍尔木兹海峡封锁持续，布伦特原油站上110美元/桶，为能源板块提供支撑；美股在Alphabet暴涨10%带动下大幅反弹，标普500涨超1%。</div>
+    </div>
+  </div>
+
+  <!-- 二、宏观与政策要闻 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">宏观与政策要闻</h2>
+    </div>
+
+    <!-- 2.1 美联储货币政策 -->
+    <h3 class="subsection-title">2.1 美联储货币政策（最新）</h3>
+    <div class="list-item">
+      <div class="list-title">利率决议</div>
+      <div class="list-desc">美联储维持联邦基金利率目标区间在3.50%-3.75%不变，<strong>符合预期</strong></div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">内部罕见分歧</div>
+      <div class="list-desc">4名票委投票反对（3票反对纳入宽松倾向措辞，1票希望降息25BP），为1992年以来最多反对票的会议</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">鲍威尔"最后一舞"</div>
+      <div class="list-desc">确认卸任主席后将继续<strong>留任理事</strong>，称因法律诉讼让其"别无选择"，承诺不当"影子主席"；并以俏皮话"下次见不到你们了"告别</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">通胀表述升级</div>
+      <div class="list-desc">将通胀从"略高"上调为"<strong>高企</strong>"，新增"全球能源价格影响"表述</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">降息预期</div>
+      <div class="list-desc">CME美联储观察显示，<strong>6月维持利率不变概率95%</strong>，年内加息可能性大于降息</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">机构最新观点</div>
+      <div class="list-desc">摩根士丹利推迟降息预测至2027年；中金预计下次降息推迟至Q4；华泰证券认为降息门槛已提高</div>
+    </div>
+
+    <!-- 2.2 地缘局势 -->
+    <h3 class="subsection-title">2.2 地缘局势：美伊博弈持续升级</h3>
+    <div class="highlight-box">
+      <div class="highlight-title">特朗普政府官员</div>
+      <div class="highlight-text">基于《战争权力法》，2月28日以来的敌对行动已"终止"，但<strong>霍尔木兹海峡仍处于封锁状态</strong></div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">特朗普最新表态</div>
+      <div class="highlight-text">可能需要<strong>打破伊朗停火协议</strong>；与油气高管讨论将封锁持续数月；在核问题解决前不会解除封锁</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">伊朗强硬回应</div>
+      <div class="highlight-text">外交部发言人巴加埃表示——"期待谈判迅速达成结果<strong>并不现实</strong>"，称47年积累了对美方深深的不信任；议会议员称"<strong>封锁即宣战</strong>"，或以军事行动清除海上障碍</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">美军方案</div>
+      <div class="highlight-text">知情人士称中央司令部已准备"短促而强力"打击方案，另有一方案为<strong>控制霍尔木兹海峡部分海域恢复航运</strong>，可能涉及地面部队</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">能源影响</div>
+      <div class="highlight-text">油价高位（布伦特110美元+）持续压制全球通胀预期，亚太开发银行警告若能源持续中断，2026年亚太增长将放缓至4.7%</div>
+    </div>
+
+    <!-- 2.3 中国宏观政策 -->
+    <h3 class="subsection-title">2.3 中国宏观政策</h3>
+    <div class="list-item">
+      <div class="list-title">央行流动性</div>
+      <div class="list-desc">将开展<strong>3000亿元3个月期买断式逆回购</strong>，节后首日（5月6日）直接落地，超预期</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">科技创新金融支持</div>
+      <div class="list-desc">央行、发改委、财政部联合印发《关于扩大科技创新和技术改造贷款投放的通知》，将研发投入较高的<strong>民营中小企业纳入支持</strong>，AI、电子信息等<strong>14个领域</strong>获重点支持</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">设备更新资金</div>
+      <div class="list-desc">2026年<strong>第二批915亿元超长期特别国债</strong>支持设备更新资金已下达</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">猪肉储备</div>
+      <div class="list-desc">国家发改委等四部门将支持地方开展<strong>冻猪肉商业储备收储</strong></div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">深圳楼市松绑</div>
+      <div class="list-desc">公积金贷款最高额度提高至<strong>100万元</strong>，进一步优化限购</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">易会满被双开</div>
+      <div class="list-desc">十四届全国政协经济委员会原副主任易会满严重违纪违法被开除党籍和公职</div>
+    </div>
+  </div>
+
+  <!-- 三、A股市场动态 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">A股市场动态（4月30日收盘）</h2>
+    </div>
+
+    <!-- 3.1 主要指数 -->
+    <h3 class="subsection-title">3.1 主要指数</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>4月累计涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上证指数</td><td><strong>4112.16</strong></td><td class="good">+0.11%</td><td class="good">+5.66%</td></tr>
+          <tr><td>深证成指</td><td><strong>15107.55</strong></td><td class="bad">-0.09%</td><td class="good">+12.09%</td></tr>
+          <tr><td>创业板指</td><td><strong>3677.15</strong></td><td class="bad">-0.27%</td><td class="good">+15.45%</td></tr>
+          <tr><td>科创50</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>沪深300</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">注：A股5月1日-5月5日劳动节休市，5月6日（周二）复市</div>
+
+    <!-- 3.2 板块资金动向 -->
+    <h3 class="subsection-title">3.2 板块资金动向（4月30日）</h3>
+    <div class="list-item">
+      <div class="list-title">主力净流入前三</div>
+      <div class="list-desc">电力设备（+120亿+）、有色金属（+120亿+）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">储能/稀土永磁/固态电池</div>
+      <div class="list-desc">资金净流入居前</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">锂电池产业链</div>
+      <div class="list-desc">爆发，多股涨停</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">融资余额</div>
+      <div class="list-desc">4月30日较前一日增加约155亿元</div>
+    </div>
+
+    <!-- 3.3 重大产业与公司动态 -->
+    <h3 class="subsection-title">3.3 重大产业与公司动态</h3>
+    <div class="card card-accent">
+      <div class="card-title">1. Alphabet财报大超预期（4月30日凌晨）</div>
+      <div class="card-text">
+        <p>Q1营收+22%至901亿美元，谷歌云+63%至200亿美元</p>
+        <p style="margin-top:8px;">净利润暴增81%，宣布700亿美元回购+5%股息上调</p>
+        <p style="margin-top:8px;">资本支出指引大幅上调至1800-1900亿美元</p>
+        <p style="margin-top:8px;">Alphabet暴涨10%，TPU8系列发布，中金继续看多光通信/存储/晶圆代工</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">2. 三星电子Q1营业利润同比+756%</div>
+      <div class="card-text">创季度新高，芯片业务贡献主要收益</div>
+    </div>
+    <div class="card">
+      <div class="card-title">3. 宁德时代拟配售H股筹资约391.9亿港元</div>
+      <div class="card-text">用于全球新能源项目建设</div>
+    </div>
+  </div>
+
+  <!-- 四、大宗商品与外汇 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">大宗商品与外汇</h2>
+    </div>
+    <div class="list-item">
+      <div class="list-title">黄金</div>
+      <div class="list-desc">4617美元附近高位震荡，霍尔木兹风险+全球不确定性支撑</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">原油</div>
+      <div class="list-desc">布伦特110美元+，霍尔木兹封锁持续，高盛上调年末预期至90美元</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">人民币</div>
+      <div class="list-desc">USDCNH 6.8320，窄幅震荡</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">日元</div>
+      <div class="list-desc">USDJPY 160.268，日本财务省警告投机行为，干预风险升温</div>
+    </div>
+  </div>
+
+  <!-- 五、中长线展望 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">中长线展望</h2>
+    </div>
+    <div class="card-title">核心观察点：</div>
+    <div class="list-item">
+      <div class="list-title">1. 霍尔木兹博弈走向</div>
+      <div class="list-desc">若美军采取军事行动，油价将再度飙升，通胀压力卷土重来；若谈判重启，封锁缓和，能源压力缓解</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">2. 美联储利率路径</div>
+      <div class="list-desc">年内降息概率极低，流动性收紧对高估值资产（科技股/黄金）的影响</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">3. 中国政策节奏</div>
+      <div class="list-desc">节后3000亿逆回购落地，"六张网"+AI专项贷款加速，A股节后资金面预期改善</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">4. Alphabet资本开支扩张</div>
+      <div class="list-desc">算力需求长期牛市格局确立，但当前科技股估值偏高，需注意财报后的预期差</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">来源：jin10 MCP（行情/快讯）、mx-skills（A股数据）、multi-search-engine（联网补充）</div>
+    <div class="footer-path">Task2 | stock-agent | 2026-05-01 09:00 CST</div>
+  </div>
+
+</div>
+</body>
+</html>
