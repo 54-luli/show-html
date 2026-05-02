@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-02 热点新闻早报</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Link styles */
+a { color: #667eea; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+.badge-red { background: #fef2f2; color: #f04438; }
+.badge-orange { background: #fff7ed; color: #f79009; }
+.badge-blue { background: #eff6ff; color: #3b82f6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-02 · 热点新闻早报</span>
+    <h1 class="cover-title">📰 热点新闻早报<br>2026年5月2日 08:30</h1>
+    <p class="cover-subtitle">美伊局势持续博弈、阿联酋退出OPEC+、AI军备竞赛升级、创业板刷新十年新高</p>
+    <div class="tag-row">
+      <span class="tag">美伊局势</span>
+      <span class="tag">AI竞争</span>
+      <span class="tag">贸易关税</span>
+      <span class="tag">俄乌战况</span>
+    </div>
+  </div>
+
+  <!-- 一、国际头条 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">国际头条</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🔴 美伊局势｜战争权到期，伊递交新方案，美伊博弈持续</div>
+      <div class="card-text">
+        <p><strong>特朗普通知国会：伊朗敌对行动"已终止"</strong>。白宫称4月7日以来美军与伊朗无交火，5月1日《战争权力法》60天授权到期后，特朗普写信称"敌对行动已结束"，试图绕过国会审批。但参议院民主党领袖舒默反驳："这是非法战争，每一天都在让生命处于危险。"</p>
+        <p style="margin-top:8px"><strong>伊朗递交最新谈判方案</strong>。伊方4月30日通过巴基斯坦向美方转交新方案，特朗普5月1日公开表示"不满意"。伊朗最高领袖哈梅内伊同日称当前阶段需推动"经济抗争"。</p>
+        <p style="margin-top:8px"><strong>霍尔木兹海峡：7艘船只通过</strong>。伊朗革命卫队宣布将在波斯湾近2000公里海岸线实施"新规则"，称将霍尔木兹打造为"安全与繁荣之源"。</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">其他重要动态</div>
+      <div class="card-text">
+        <p>• 美国"福特"号航母已离开中东</p>
+        <p>• 美防长下令从德国撤军5000人，将在6-12个月内完成</p>
+        <p>• 美国国务院批准向中东四国出售武器：科威特25亿/以色列9.9亿/卡塔尔40.1亿/阿联酋1.5亿美元</p>
+        <p>• 以色列：或"很快需要"恢复对伊军事行动。以媒称美伊谈判最早下周破裂，以方正"严阵以待"</p>
+      </div>
+    </div>
+    
+    <div class="highlight-box">
+      <div class="highlight-title">🔎 研判</div>
+      <div class="highlight-text">伊朗递交新方案但特朗普"不满意"，伊美博弈进入新阶段。以色列不甘心停火，中东局势随时可能再度升温。</div>
+    </div>
+  </div>
+
+  <!-- 二、地缘经济 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">地缘经济</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🟠 阿联酋正式退出OPEC及OPEC+</div>
+      <div class="card-text">被认为是美以对伊战争后，中东产油国重新评估安全、市场和主权的一次标志性事件。</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">WTO计划削减约10%预算</div>
+      <div class="card-text">因美国长期拖欠会费，越来越多成员国未按时缴费，措施包括冻结招聘、裁减短期人员。</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">国际能源署：全球面临最严重能源危机</div>
+      <div class="card-text">能源供应紧张局势持续，各国需加强能源安全和多元化布局。</div>
+    </div>
+  </div>
+
+  <!-- 三、贸易关税 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">贸易关税</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🔴 特朗普宣布：下周起对欧盟汽车加征25%关税</div>
+      <div class="card-text">
+        <p>特朗普5月1日称将把对欧盟汽车关税提高至25%，理由是欧盟"未遵守贸易协议"。</p>
+        <p style="margin-top:8px">欧盟委员会回应：欧盟一直在按标准程序执行协议，将保留一切选项维护自身利益。</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">⚡ 美农业领域：委内瑞拉石油出口新动向</div>
+      <div class="card-text">特朗普称"已销售1亿桶委内瑞拉石油"，多家大型美油企正前往委内瑞拉。</div>
+    </div>
+  </div>
+
+  <!-- 四、俄乌战况 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">俄乌战况</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🔴 俄乌｜乌军持续打击俄境内能源设施，外国志愿兵规模扩大</div>
+      <div class="card-text">
+        <p><strong>乌克兰持续打击俄罗斯腹地炼油设施</strong>。乌军命中彼尔姆边疆区Lukoil炼油厂AVT-4一级原油加工单元、下诺夫哥罗德州"Sverdlov"工厂，两处均已起火。</p>
+        <p style="margin-top:8px"><strong>乌军第四次袭击图阿普谢石油终端</strong>，2周内第4次；同日俄无人机袭击敖德萨居民楼引发火灾。</p>
+        <p style="margin-top:8px"><strong>俄军大量招募外籍士兵</strong>：截至3月底，已有至少27,407名外国人在俄乌战争中为俄方作战，来自至少135个国家，较去年11月的18,000人大幅增加。</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">其他重要动态</div>
+      <div class="card-text">
+        <p>• 俄罗斯因乌克兰威胁缩减胜利日阅兵规模</p>
+        <p>• Trump暗示普京可能同意临时停火，称与普京进行了"非常好的对话"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、AI & 科技 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">AI & 科技</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🤖 OpenAI vs Anthropic｜格局重塑，AI军备竞赛升级</div>
+      <div class="card-text">
+        <p>• <strong>Anthropic企业收入已超越OpenAI</strong>，编码工具Claude Code在企业市场大获成功</p>
+        <p style="margin-top:8px">• <strong>Anthropic正洽谈9000亿美元估值融资</strong>，两周内落地</p>
+        <p style="margin-top:8px">• <strong>OpenAI发布GPT-5.5-Cyber新模型</strong>，ChatGPT周活用户超9亿，月收入达20亿美元</p>
+        <p style="margin-top:8px">• <strong>谷歌Gemini表现超越OpenAI</strong>，Alphabet正在从竞争对手消费者业务中赢得市场份额</p>
+        <p style="margin-top:8px">• <strong>马斯克承认xAI用OpenAI模型训练Grok</strong>，在法庭作证时亲口确认"蒸馏"操作</p>
+      </div>
+    </div>
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>项目</th><th>融资</th><th>轮次</th><th>亮点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Anthropic</td><td>~900亿美元</td><td>新轮次</td><td>9000亿估值</td></tr>
+          <tr><td>David Silver（DeepMind系）</td><td>11亿美元</td><td>—</td><td>开发无需人类数据的AI</td></tr>
+          <tr><td>Parallel Web Systems</td><td>1亿美元</td><td>B轮</td><td>前Twitter CEO创立，$2B估值</td></tr>
+          <tr><td>Legora（AI法律）</td><td>5000万美元</td><td>D轮</td><td>Nvidia首次投资法律科技</td></tr>
+          <tr><td>Scout AI（军事AI）</td><td>1亿美元</td><td>—</td><td>军用AI控制无人车队</td></tr>
+          <tr><td>Humble Robotics</td><td>2400万美元</td><td>种子轮</td><td>自动驾驶</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🏛️ 美国防部与7家AI公司达成机密网络AI协议</div>
+      <div class="card-text">五角大楼与OpenAI、谷歌、英伟达、微软、SpaceX等8家公司签署协议，在机密军事网络上部署AI工具。</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🖥️ 苹果/科技新品</div>
+      <div class="card-text">
+        <p>• <strong>苹果Mac mini起售价上调200美元</strong>，因AI热潮导致零部件库存耗尽。MacBook Neo供不应求，新Mac用户数量创纪录</p>
+        <p style="margin-top:8px">• <strong>马斯克2025年特斯拉安保费增长70%</strong>（安全成本创纪录）</p>
+        <p style="margin-top:8px">• <strong>AWS CEO：AI未让程序员丢饭碗</strong>，今年招聘11000名实习生</p>
+        <p style="margin-top:8px">• <strong>Anthropic发布Mythos模型</strong>，美联储理事称监管机构需应对AI新技术对金融稳定带来的网络攻击风险</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六、金融市场 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">金融市场</h2>
+    </div>
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>涨跌</th><th>收盘</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>道指</td><td class="bad">-0.31%</td><td>49,499.27</td></tr>
+          <tr><td>标普500</td><td class="good">+0.29%</td><td>7,230.12</td></tr>
+          <tr><td>纳指</td><td class="good">+0.89%</td><td>25,114.44</td></tr>
+          <tr><td>美股存储芯片指数</td><td class="good">+3.5%（历史新高）</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="note">
+      <strong>本周</strong>：标普500累涨0.9%、道指累涨0.5%、纳指累涨1.1%，<strong>连续第六周上涨</strong>，为2024年10月以来最长连涨。<br>
+      <strong>个股亮点</strong>：苹果(AAPL)涨3.24%（Q1财报靓丽）、闪迪(SNDK)涨8.25%、英特尔(INTC)涨5.44%（股价99.62美元创历史新高）。
+    </div>
+    
+    <div class="table-wrap" style="margin-top:20px">
+      <table>
+        <thead>
+          <tr><th>品种</th><th>本周表现</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>现货黄金</td><td class="bad">-2.02%（$4,616/盎司）</td></tr>
+          <tr><td>WTI原油</td><td class="bad">-2.98%（$101.94/桶）</td></tr>
+          <tr><td>现货白银</td><td class="good">+2.22%</td></tr>
+          <tr><td>现货钯金</td><td class="good">+3.68%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">💱 外汇</div>
+      <div class="card-text">
+        <p>• 离岸人民币（CNH）收报6.8310，涨10点</p>
+        <p style="margin-top:8px">• 短端美债收益率本周累涨约10个基点</p>
+        <p style="margin-top:8px">• WTI原油投机性净多头减少3,416手至108,498手；COMEX黄金投机性净多头减少3,924手至91,574手</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">⚠️ 风险事件</div>
+      <div class="card-text">
+        <p>• <strong>精神航空（Spirit Airlines）</strong>准备最早5月2日凌晨3点停止运营</p>
+        <p style="margin-top:8px">• <strong>Cerebras IPO目标融资40亿美元</strong>（AI芯片制造商）</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🎮 GME收购eBay</div>
+      <div class="card-text">游戏驿站（GameStop）被曝考虑收购eBay，最快本月提交收购要约。GME盘后一度涨超8%，eBay涨超13%。</div>
+    </div>
+  </div>
+
+  <!-- 七、中国/国内要闻 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2 class="section-title">中国/国内要闻</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🇨🇳 中国担任联合国安理会5月轮值主席</div>
+      <div class="card-text">中国常驻联合国代表傅聪介绍，本月聚焦三项重点：重振《联合国宪章》权威、推动中东问题政治解决、支持非洲国家稳定发展。</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🇺🇸 中美外交</div>
+      <div class="card-text">
+        <p><strong>王毅与美国务卿鲁比奥通话</strong>。王毅强调台湾问题是中国核心利益、中美关系最大风险点；鲁比奥表示元首外交是美中关系核心，双方保持沟通协调。</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📈 财经政策</div>
+      <div class="card-text">
+        <p>• <strong>国务院：2030年服务业总规模突破100万亿元</strong>（2025年为80.9万亿）</p>
+        <p style="margin-top:8px">• <strong>第二批915亿超长期特别国债下达</strong>，覆盖16个领域超6700个项目</p>
+        <p style="margin-top:8px">• 富时A50期指夜盘收涨0.10%，报15,669点</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🚗 汽车</div>
+      <div class="card-text">
+        <p>• <strong>比亚迪4月销量321,123辆，海外出口超13万辆创历史新高</strong></p>
+        <p style="margin-top:8px">• <strong>奇瑞4月销量25.1万辆（+25.2%），单月出口破17万辆再创新纪录</strong></p>
+        <p style="margin-top:8px">• <strong>极狐4月销量16,532辆（+101.7%）</strong></p>
+        <p style="margin-top:8px">• <strong>长安4月交付20.95万辆（+1.7%）</strong></p>
+        <p style="margin-top:8px">• <strong>小米手机毛利率跌至8.3%</strong>，卢伟冰称涨价趋势不可避免</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🏗️ 中国科技/基建</div>
+      <div class="card-text">
+        <p>• <strong>637米！我国抽水蓄能电站最深竖井全线贯通</strong>（200多层楼高度）</p>
+        <p style="margin-top:8px">• <strong>亿航智能EH216-S完成墨西哥及拉丁美洲首次载人飞行</strong></p>
+        <p style="margin-top:8px">• <strong>深圳口岸今年出入境人数突破1亿人次</strong></p>
+        <p style="margin-top:8px">• <strong>深圳地铁平均每天亏损超1亿元</strong></p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">⚠️ 社会事件</div>
+      <div class="card-text">
+        <p>• <strong>吉林农商银行1800万存款"失踪"</strong>：原扶余惠民村镇银行员工被采取强制措施，国家金融监管总局松原分局已介入</p>
+        <p style="margin-top:8px">• <strong>广西一公司带薪放假94天</strong>（5月1日-8月2日），网友：这是什么招聘手段？</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八、国内热榜速览 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">8</span>
+      <h2 class="section-title">国内热榜速览</h2>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">微博热搜 TOP5</div>
+      <div class="card-text">
+        <p>1. 🔥 跑男什么时候变成这样了（175万热度）</p>
+        <p>2. 火车票开售即售罄原因找到了（91万）</p>
+        <p>3. 数读我国创新全方位加速突破（73万）</p>
+        <p>4. 赵又廷回复林更新想你了（41万）</p>
+        <p>5. 人到一定年纪就会解锁的动作（35万）</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">知乎热榜 TOP5</div>
+      <div class="card-text">
+        <p>1. 北京车展两天涌入至少6000名外国人（348万热度）</p>
+        <p>2. 如何评价电影《穿普拉达的女王2》（172万）</p>
+        <p>3. AI蒸馏出李白所有创作规律，真正的李白底牌是什么（160万）</p>
+        <p>4. 广州地铁男子向乘客喷辣椒水（119万）</p>
+        <p>5. 王毅同美国国务卿鲁比奥通话（117万）</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">百度热搜 TOP5</div>
+      <div class="card-text">
+        <p>1. 🔥 东北早市被俄罗斯游客"包场"（780万热度）</p>
+        <p>2. 县长当场公布自己手机号（771万）</p>
+        <p>3. 冲刺100万亿（762万）</p>
+        <p>4. 男子从北京跑步37天去武汉（752万）</p>
+        <p>5. 五一档新片票房破2亿《寒战1994》领先（743万）</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">IT之家科技热榜 TOP5</div>
+      <div class="card-text">
+        <p>1. 美国防部与8家AI公司达成机密网络AI协议</p>
+        <p>2. 马斯克xAI被曝用OpenAI模型蒸馏Grok</p>
+        <p>3. 苹果Mac mini涨价$200</p>
+        <p>4. 奥斯卡明确规定AI演员和剧本没资格获奖</p>
+        <p>5. 比亚迪4月海外出口13万辆创纪录</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 九、5月2日你需要知道 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">9</span>
+      <h2 class="section-title">5月2日你需要知道</h2>
+    </div>
+    
+    <div class="highlight-box">
+      <div class="highlight-text">
+        美伊战争权到期但停火悬而未决；阿联酋退出OPEC+重塑中东油格局；美欧汽车关税战升温；Anthropic估值冲击9000亿美元超越OpenAI；比亚迪、奇瑞4月出口再创历史；中国正式担任安理会轮值主席。
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">报告生成时间：2026-05-02 08:30</div>
+    <div class="footer-path">数据来源：金十数据、财联社、wallstreetcn、IT之家、百度、微博、知乎、The Guardian、ISW、TechCrunch、Axios、AP News等</div>
+  </div>
+
+</div>
+</body>
+</html>
