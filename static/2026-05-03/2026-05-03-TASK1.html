@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-03 热点新闻早报</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Link styles */
+a { color: #667eea; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Source badge */
+.source-badge {
+  display: inline-block;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-03 · 热点新闻早报</span>
+    <h1 class="cover-title">2026-05-03<br>热点新闻早报</h1>
+    <p class="cover-subtitle">美伊局势持续博弈、特朗普威胁重启空袭、巴菲特股东大会落幕、新势力销量全面报喜</p>
+    <div class="tag-row">
+      <span class="tag">美伊局势</span>
+      <span class="tag">贸易关税</span>
+      <span class="tag">科技前沿</span>
+      <span class="tag">经济观察</span>
+    </div>
+  </div>
+
+  <!-- 核心摘要 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">核心摘要</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">今日三大焦点</div>
+      <div class="card-text">
+        <p>1. 特朗普威胁重启对伊朗空袭，伊朗提出14点终战方案并做好两手准备，霍尔木兹海峡局势持续牵动全球油运市场。</p>
+        <p style="margin-top:8px">2. 特朗普宣布下周对欧盟输美汽车加征25%关税，欧洲议会要员回应将"坚定回应"；美德关系因5000名驻德美军撤军计划再添裂痕。</p>
+        <p style="margin-top:8px">3. 巴菲特卸任后首场伯克希尔股东大会落幕，一季度净利润暴增120%，现金储备创纪录3970亿美元，CEO阿贝尔表示当下非理想资金投放时机。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 国际动态 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">国际动态</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🔴 美伊局势：特朗普威胁重启空袭，伊朗提出14点终战方案</div>
+      <div class="card-text">
+        <p>美东时间5月2日傍晚，美国总统特朗普在佛罗里达州接受采访时表示，存在重启对伊朗空袭的可能性。特朗普称将研究伊朗最新提交的方案，但"无法想象"该方案可以接受，并威胁伊朗"尚未付出足够大代价"。</p>
+        <p style="margin-top:8px">此前，伊朗经巴基斯坦斡旋方向美国提交14点方案作为回应，核心条件包括：确保不再遭受军事侵略、美军从伊朗周边撤出、解除海上封锁、解冻被冻结资产、支付战争赔偿、取消制裁、在所有战线（含黎巴嫩）实现和平、建立霍尔木兹海峡新管理机制。伊朗方面强调，各项议题须在30天内解决，重点是"结束战争"而非延长停火。</p>
+        <p style="margin-top:8px">伊朗军方官员已表态"已为美方军事冒险做好充分准备"。伊朗副外长表示"球在美国一边"，但德黑兰对美方诚意"持悲观与不信任态度"。</p>
+      </div>
+      <div class="source-badge">来源：Reuters/wallstreetcn/cls/jin10 | 重合度：★★★★★</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 霍尔木兹海峡：伊拉克称7天内可恢复石油出口</div>
+      <div class="card-text">
+        <p>伊拉克石油部副部长Basim Mohammed周六表示，一旦霍尔木兹海峡危机结束，伊拉克可在七天内将石油产量和出口恢复至正常水平（当前150万桶/日，约20万桶/日经杰伊汉出口）。此外两艘油轮已待命，预计还有两艘加入。</p>
+        <p style="margin-top:8px">油轮追踪机构数据显示，科威特4月原油出口量为零，显示海峡封锁对全球油运造成实质冲击。卡塔尔首相向伊朗外长强调"关闭霍尔木兹海峡将导致危机加深"。全球最大集装箱航运公司正计划开辟新线路绕过霍尔木兹海峡。</p>
+        <p style="margin-top:8px">伯克希尔保险副董事长阿吉特·贾恩表示，霍尔木兹海峡保险"取决于价格"，美国海军护航是承保前提条件。</p>
+      </div>
+      <div class="source-badge">来源：jin10/wallstreetcn/cls | 重合度：★★★★☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 特朗普宣布下周对欧盟汽车加征25%关税</div>
+      <div class="card-text">
+        <p>当地时间5月1日，特朗普表示由于欧盟未履行已达成的贸易协议，将于下周对进口自欧盟的汽车和卡车加征25%关税，在美设厂生产则可豁免。欧洲议会国际贸易委员会主席朗格回应称此举"完全不可接受"，强调欧盟须以清晰坚定立场回应，并充分运用反经济胁迫工具。研究称美提高汽车关税将致德国损失150亿欧元。</p>
+      </div>
+      <div class="source-badge">来源：tavily/zhihu/60s/wallstreetcn | 重合度：★★★★★</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 美国计划从德国撤出5000名驻军</div>
+      <div class="card-text">
+        <p>美国国防部长下令从德国撤出约5000名美军，撤军工作将在未来6至12个月内完成。美国国会参众两院共和党高层发表联合声明，称对五角大楼此项计划"深感担忧"，指出德国已大幅增加国防支出并为美军提供支持，呼吁任何涉及美军欧洲部署的重大调整均应与国会及盟友密切协调。与此同时，德国正在立陶宛组建"第45坦克旅"，近5000名德军将在2027年前达到全面战备状态。</p>
+      </div>
+      <div class="source-badge">来源：jin10/wallstreetcn/cls/weibo | 重合度：★★★★☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 美国制裁古巴升至"危险前所未有"级别</div>
+      <div class="card-text">
+        <p>古巴国家主席迪亚斯-卡内尔表示，美国总统将对古巴的军事侵略威胁已升至"危险且前所未有"的级别，古巴不会屈服。特朗普政府公布多项新制裁措施，允许打击几乎所有参与古巴业务的非美国公民或实体，学者警告此举可能吓退该国所有外企。哥伦比亚总统佩特罗明确反对对古巴进行任何形式军事干预，称加勒比地区是"和平区"，外部势力不应干涉。</p>
+      </div>
+      <div class="source-badge">来源：jin10/cls | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🔵 特朗普政府新规：超300万人失去联邦食品援助</div>
+      <div class="card-text">
+        <p>随着特朗普政府食品券申领资格新规生效，全美SNAP登记人数自去年7月以来减少近350万。亚利桑那州实施新规后受益人数下降约50%。芝加哥大学公共政策教授对此急速下降表示担忧。</p>
+      </div>
+      <div class="source-badge">来源：jin10 | 重合度：★★☆☆☆</div>
+    </div>
+  </div>
+
+  <!-- 国内要闻 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">国内要闻</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🔴 中国商务部发布对美"阻断令"：不得承认、不得执行美制裁</div>
+      <div class="card-text">
+        <p>针对美国对5家中国企业实施涉伊朗石油制裁措施，中国商务部发布阻断禁令，明确要求中国境内主体不得承认、不得执行、不得遵守美方相关制裁。这是中国官方针对美国单边制裁的正式法律反击行动。</p>
+      </div>
+      <div class="source-badge">来源：60s/wallstreetcn | 重合度：★★★★☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 上海三大先导产业母基金一季度投决突破500亿元</div>
+      <div class="card-text">
+        <p>上海三大先导产业（集成电路、生物医药、人工智能）母基金一季度累计投决突破500亿元，显示上海在战略性新兴产业领域的资本布局持续加码。</p>
+      </div>
+      <div class="source-badge">来源：wallstreetcn | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 2026五一档新片票房破4亿元，平均票价36.9元近4年同期最低</div>
+      <div class="card-text">
+        <p>五一假期第二日，全国五一档新片总票房突破4亿元（首日破3亿），平均票价36.9元为近4年同期最低水平。</p>
+      </div>
+      <div class="source-badge">来源：cls | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 深圳口岸今年出入境人数突破1亿人次</div>
+      <div class="card-text">
+        <p>深圳口岸2026年出入境人数已突破1亿人次，五一假期首日全国交通出行人数超3.3亿人次。</p>
+      </div>
+      <div class="source-badge">来源：jin10（昨日汇总）| 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 苏州楼市新政：公积金最高贷款150万元，加大购房支持</div>
+      <div class="card-text">
+        <p>苏州出台新一轮楼市支持政策，个人公积金最高贷款额度提至150万元，并加大多孩家庭购房支持力度，鼓励差异化贷款贴息。</p>
+      </div>
+      <div class="source-badge">来源：60s | 重合度：★★☆☆☆</div>
+    </div>
+  </div>
+
+  <!-- 科技前沿 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">科技前沿</h2>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 OpenAI阿尔特曼谈模型发展优先级：更聪明仍是最重要的事</div>
+      <div class="card-text">
+        <p>OpenAI CEO阿尔特曼在接受采访时表示，他一直在思考"让模型更便宜、更快速"是否比"让模型更聪明"更重要，但最终结论是"让模型更聪明一点似乎仍然是最重要的事情"。他同时表示欢迎马斯克参加GPT-5.5庆功宴，向马斯克"示好"。</p>
+      </div>
+      <div class="source-badge">来源：jin10/ithome | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 Anthropic被指有一款"太危险不能发布"的AI模型</div>
+      <div class="card-text">
+        <p>多份报道披露Anthropic正在开发一款被内部认为"太危险不能公发布"的AI模型，引发AI安全讨论。网络安全公司Okta报告显示AI agents在访问关键系统时存在多重安全漏洞，美国国防部正与7家科技公司达成协议使用AI工具辅助作战决策。</p>
+      </div>
+      <div class="source-badge">来源：tavily（Forbes/Fox News）| 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 谷歌、微软等四巨头今年将豪掷超7000亿美元</div>
+      <div class="card-text">
+        <p>分析师数据显示，谷歌、微软、Meta、亚马逊四大科技巨头2026年资本支出预计超7000亿美元，多位分析师直言AI熊市论是"垃圾"。与此同时，MIT AI专家警告用自动化替代Z世代入门员工是"透支未来"。Reddit CEO称Reddit是AI的"燃料"。</p>
+      </div>
+      <div class="source-badge">来源：ithome/tavily | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 NVIDIA DLSS 4.5盲测"碾压"AMD FSR 4.1</div>
+      <div class="card-text">
+        <p>IT之家报道，英伟达DLSS 4.5在七款3A大作盲测中赢得六款，大幅领先AMD FSR 4.1，进一步扩大帧生成技术领先优势。</p>
+      </div>
+      <div class="source-badge">来源：ithome | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 华为Pura X Max首销单品激活近十万</div>
+      <div class="card-text">
+        <p>数码博主及多方消息显示，华为折叠屏手机Pura X Max系列首销单品激活量接近十万台，畅享90 Pro Max累计激活超百万台。华为乾崑智驾系统4月安全出行报告显示，累计辅助驾驶里程达104.7亿公里，跨越百亿公里里程碑。</p>
+      </div>
+      <div class="source-badge">来源：ithome | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 哈佛新研究：AI模型急诊科场景诊断能力有望超越人类医生</div>
+      <div class="card-text">
+        <p>哈佛医学院最新研究显示，AI模型在急诊科场景下的诊断能力展现出超越人类医生的潜力，相关论文发表在Nature等学术期刊。</p>
+      </div>
+      <div class="source-badge">来源：ithome | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 苹果iOS 27系统前瞻：卫星通信新增功能、全新虚拟键盘</div>
+      <div class="card-text">
+        <p>IT之家报道，苹果iOS 27系统将增加卫星通信多项功能并推出全新虚拟键盘，预计在WWDC 26正式发布。iPhone 18 Pro或有激进定价策略，或不涨价。</p>
+      </div>
+      <div class="source-badge">来源：ithome | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 小米MIX 5曝光：真全面屏回归、磁吸镜头技术</div>
+      <div class="card-text">
+        <p>小米MIX 5手机规格曝光，搭载真全面屏回归和磁吸镜头技术，将登陆全球市场。</p>
+      </div>
+      <div class="source-badge">来源：ithome | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 追觅CEO俞浩：追觅手机要对标苹果三星，三分天下</div>
+      <div class="card-text">
+        <p>追觅科技CEO俞浩在接受采访时表示，追觅手机目标是对标苹果和三星，做到"三分天下"。此前追觅已在扫地机器人等智能家居领域取得显著市场份额。</p>
+      </div>
+      <div class="source-badge">来源：ithome/weibo | 重合度：★★☆☆☆</div>
+    </div>
+  </div>
+
+  <!-- 经济观察 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">经济观察</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🟠 4月新能源汽车：新势力销量全面报喜</div>
+      <div class="card-text">
+        <p>4月新能源汽车交付数据密集出炉，多家车企创纪录：</p>
+        <p style="margin-top:8px">• 零跑汽车：全系交付超7万辆（+73.9%），暂居新势力榜首</p>
+        <p>• 理想汽车：交付超3.4万辆</p>
+        <p>• 鸿蒙智行：交付超3.2万辆（+18.9%）</p>
+        <p>• 小米汽车：交付超3万辆（环比增长50%，前4月累计10.9万辆）</p>
+        <p>• 蔚来三品牌：合计交付近3万辆（+22.8%）</p>
+        <p style="margin-top:8px">广汽国际1-4月出口量同比增长133.9%。比亚迪4月8个车系销量破2万辆。</p>
+      </div>
+      <div class="source-badge">来源：zhihu/ithome/60s | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟠 零跑7万月销持续登顶新势力，揭示"高基数高增长"秘诀</div>
+      <div class="card-text">
+        <p>零跑汽车连续多月蝉联新势力月销榜首，格隆汇深度分析其增长逻辑：高性价比产品定位+增程+纯电双线布局+渠道下沉战略共振。</p>
+      </div>
+      <div class="source-badge">来源：gelonghui | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 科大讯飞：TOKEN经济带动新增长曲线</div>
+      <div class="card-text">
+        <p>科大讯飞最新财报显示，依托TOKEN经济模式（向开发者/企业出售AI调用额度），公司正在构建第二增长曲线，业务质量持续提升。</p>
+      </div>
+      <div class="source-badge">来源：gelonghui | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟡 COMEX黄金近月合约3至4月累计大跌11.77%</div>
+      <div class="card-text">
+        <p>黄金市场在经历2025年大涨后，2026年3至4月近月合约累计下跌11.77%，创历史最大双月跌幅，主要受美元走强和实际利率回升压制。</p>
+      </div>
+      <div class="source-badge">来源：60s | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🟢 纳指、标普500指数再创新高，英特尔涨超5%</div>
+      <div class="card-text">
+        <p>美股方面，纳指和标普500指数均创历史新高，科技股延续强势。英特尔因AI芯片业务预期改善涨超5%，中概股指数小幅下跌0.59%。</p>
+      </div>
+      <div class="source-badge">来源：gelonghui | 重合度：★★☆☆☆</div>
+    </div>
+  </div>
+
+  <!-- 热榜精选 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">热榜精选</h2>
+    </div>
+    
+    <div class="card card-accent">
+      <div class="card-title">🏅 吴宜泽17:16绝杀马克·艾伦，首进斯诺克世锦赛决赛</div>
+      <div class="card-text">
+        <p>北京时间5月3日凌晨，在克鲁斯堡剧院进行的斯诺克世锦赛半决赛中，中国"00后"选手吴宜泽在14:16落后的绝境下连胜三局，以17:16完成惊天逆转，淘汰北爱尔兰名将马克·艾伦，强势晋级决赛。他将与肖恩·墨菲争夺冠军。</p>
+        <p style="margin-top:8px">吴宜泽成为首位闯入斯诺克世锦赛决赛的中国"00后"选手，也是继去年赵心童夺冠后中国选手连续第二年打进决赛。</p>
+      </div>
+      <div class="source-badge">来源：weibo/zhihu/ithome | 重合度：★★★★★</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">🔥 国乒男团世乒赛爆冷不敌韩国</div>
+      <div class="card-text">
+        <p>在世乒赛男子团体比赛中，中国男队爆冷不敌韩国队，引发关注。</p>
+      </div>
+      <div class="source-badge">来源：weibo | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 外交部发布中方关于日本拥核问题工作文件</div>
+      <div class="card-text">
+        <p>外交部发布关于日本拥核问题的工作文件，呼吁《不扩散核武器条约》缔约国高度警惕日本寻求拥核的危险倾向，要求IAEA强化对日核监督。</p>
+      </div>
+      <div class="source-badge">来源：zhihu | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 胖东来起诉探店博主名誉侵权</div>
+      <div class="card-text">
+        <p>胖东来就博主"惊梦人"发布多条质疑视频（含"249元奢侈品毛巾"等）正式提起诉讼，同时详细回应毛巾进货渠道、员工工资（平均到手8974元/月）、罐装杂粮定价等质疑。博主此前质疑毛巾暴利、员工工资真实性。</p>
+      </div>
+      <div class="source-badge">来源：zhihu | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 马斯克2025年总薪酬1583.6亿美元，实际薪酬为零</div>
+      <div class="card-text">
+        <p>特斯拉年报披露马斯克2025年总薪酬1583.6亿美元（全部为股票奖励），但因全年未达成任何市值及经营考核目标，实际到手薪酬为零。SpaceX正筹备IPO，估值或达1.75万亿美元。</p>
+      </div>
+      <div class="source-badge">来源：zhihu | 重合度：★★★☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 合肥工业大学通报：盗用他人毕业作品参赛获奖学生被开除学籍</div>
+      <div class="card-text">
+        <p>福州大学校友动画作品《鼓小浪》被合肥工业大学学生盗用参加米兰设计周获一等奖，合肥工业大学核查后开除涉事学生学籍，并表态将规范竞赛管理、强化学术诚信。</p>
+      </div>
+      <div class="source-badge">来源：zhihu | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 俞浩称追觅要与苹果三星三分天下</div>
+      <div class="card-text">
+        <p>追觅科技CEO俞浩再放豪言，称追觅手机将对标苹果三星。目前追觅尚未推出手机产品，此言引发科技圈热议。</p>
+      </div>
+      <div class="source-badge">来源：ithome/weibo | 重合度：★★☆☆☆</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">📌 张雪机车WSBK匈牙利站再夺冠军</div>
+      <div class="card-text">
+        <p>中国摩托车手张雪机车在WSBK匈牙利站第一回合正赛中夺冠，这是该车队第三次获得世界冠军。荣耀将推出联名款"冠军手表"，俞浩微博发声支持。</p>
+      </div>
+      <div class="source-badge">来源：weibo/ithome | 重合度：★★★☆☆</div>
+    </div>
+  </div>
+
+  <!-- 数据来源说明 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2 class="section-title">数据来源说明</h2>
+    </div>
+    
+    <div class="card">
+      <div class="card-text">
+        <p>• 全球资讯：tavily-search</p>
+        <p style="margin-top:8px">• 财经快讯：jin10 MCP / wallstreetcn / cls</p>
+        <p style="margin-top:8px">• 热榜聚合：newsnow（xueqiu / weibo / ithome / gelonghui）</p>
+        <p style="margin-top:8px">• 国内热点：60s-api（weibo热榜 / 知乎热榜 / 每日60秒）</p>
+        <p style="margin-top:8px">• AI领域：tavily-search / ithome</p>
+        <p style="margin-top:8px">• 财经研报：gelonghui</p>
+        <p style="margin-top:8px">• ⚠️ 行情数据仅供参考，不参与新闻优先级排序（jin10/xueqiu为行情数据）</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">本报告由 61news（news-agent）自动生成 | 2026-05-03 08:30 CST</div>
+    <div class="footer-path">数据来源：tavily-search / jin10 MCP / wallstreetcn / cls / ithome / zhihu / weibo / gelonghui</div>
+  </div>
+
+</div>
+</body>
+</html>
