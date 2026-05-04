@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-04 热点新闻早报</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Source tag */
+.source-tag {
+  display: inline-block;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Verification badge */
+.verification-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.verification-multi {
+  background: #e6f7ed;
+  color: #17b26a;
+}
+.verification-single {
+  background: #fff7ed;
+  color: #f79009;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Link */
+a {
+  color: #667eea;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-04 · 热点新闻早报</span>
+    <h1 class="cover-title">📰 今日热点：<br>美伊博弈升级 & AI融资热潮</h1>
+    <p class="cover-subtitle">霍尔木兹海峡局势持续紧张，Anthropic估值9000亿美元融资在即，五一假期出行消费创新高。</p>
+    <div class="tag-row">
+      <span class="tag">美伊谈判关键阶段</span>
+      <span class="tag">AI赛道竞争白热化</span>
+      <span class="tag">五一消费创新高</span>
+    </div>
+  </div>
+
+  <!-- 核心摘要 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">核心摘要</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">美伊霍尔木兹博弈升级</div>
+      <div class="card-text">伊朗与美国的谈判进入关键阶段，伊朗正审议美方对"14点提议"的回应；美军宣布投入导弹驱逐舰、100余架飞机及15000名军人参与恢复霍尔木兹海峡商业通航行动，全球最大航运公司已推出绕开霍尔木兹的新航线。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Anthropic估值9000亿美元融资在即</div>
+      <div class="card-text">Anthropic正推进约500亿美元的新一轮融资，估值有望超过9000亿美元，多个信源显示该轮融资将在48小时内截止；同时OpenAI发布GPT-5.5-Cyber，Qualcomm因与OpenAI的AI手机芯片合作消息股价大涨，AI赛道竞争白热化。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">五一假期国内消费与出行创新高</div>
+      <div class="card-text">五一假期跨区域人员流动量预计达15.2亿人次创历史同期新高；文旅产业从"流量"向"留量"转型；国产千万级纯电超跑时速496公里全球限量30台秒售罄；斯诺克世锦赛吴宜泽10-7领先。</div>
+    </div>
+  </div>
+
+  <!-- 国际动态 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">国际动态</h2>
+    </div>
+    
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🔴 霍尔木兹海峡局势持续紧张</div>
+      <span class="source-tag">来源：wallstreetcn / cls / jin10 / 百度</span>
+      <div class="card-text mt-12">
+        5月4日，美伊博弈在霍尔木兹海峡持续升级。当天早些时候，美国总统特朗普宣布，将于5月4日启动"自由计划"，引导被困在霍尔木兹海峡的船只驶离这一区域。美国中央司令部随即发布声明，表示军队将于当天开始支持该行动，支援规模包括导弹驱逐舰、100多架陆基和海基飞机、多域无人平台以及15000名现役军人。不过，美方官员随后澄清，该行动不涉及美军军舰为商船提供直接护航。
+      </div>
+      <div class="card-text mt-12">
+        与此同时，伊朗议会国家安全和外交政策委员会主席阿齐兹明确警告：任何美国对霍尔木兹海峡"新管理制度"的干涉都将被视为违反停火协议。伊朗方面正审议美国通过巴基斯坦转达的对其"14点提议"的回应，目前谈判不涉及核问题。巴基斯坦外长达尔表示，巴方致力于推动各方和平对话，并称伊朗已将巴基斯坦列为主要调解方。
+      </div>
+      <div class="card-text mt-12">
+        全球最大航运公司（马士基/MSC）已紧急推出绕开霍尔木兹海峡的中东至欧洲新航线，英国海上贸易行动办公室证实一艘油轮在阿联酋富查伊拉以北约78海里处被不明炮弹击中。海事情报公司"油轮追踪者"数据显示，4月共有25艘伊朗原油油轮驶离，其中7艘因美军封锁返回伊朗，2艘在印度洋被美方扣押。
+      </div>
+      <div class="highlight-box mt-16">
+        <div class="highlight-title">市场反应</div>
+        <div class="highlight-text">WTI原油开盘跌2.7%至101.02美元/桶，布伦特跌2.4%，黄金高开10美元报4624.39美元/盎司。美国财长贝森特表示，美国经济和金融压力正在令伊朗"窒息"，伊朗石油业"一周内"可能被迫关井。</div>
+      </div>
+      <div class="note mt-12">
+        🔗 <a href="https://flash.jin10.com/detail/20260504074129780800" target="_blank">查看原文链接</a>
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🟠 美伊谈判持续推进</div>
+      <span class="source-tag">来源：tavily / wallstreetcn / 百度</span>
+      <div class="card-text mt-12">
+        特朗普5月3日表示，美伊谈判"进展非常顺利"，但同时又称伊朗的"新提议"不可接受。据Axios报道，美国已于5月4日前就结束伊朗战争的潜在协议向伊朗递送了修订版草案。泽连斯基同日会晤欧洲多国领导人，称愿启动下一轮三方谈判。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 美联航客机降落事故</div>
+      <span class="source-tag">来源：ithome / 百度 / jin10</span>
+      <div class="card-text mt-12">
+        当地时间5月3日，美联航一架从威尼斯飞往纽瓦克的波音767客机在降落时撞上紧邻机场的新泽西收费公路路灯杆，机体受损，同时损坏一辆牵引挂车，挂车司机轻伤。机上人员均未受伤，美国联邦航空管理局已展开调查。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 西班牙首相专机紧急降落土耳其</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        当地时间5月3日，西班牙首相桑切斯乘专机前往亚美尼亚途中发生故障，被迫在土耳其首都安卡拉紧急降落，西班牙代表团在当地过夜，预计4日修复后继续行程。
+      </div>
+    </div>
+  </div>
+
+  <!-- 国内要闻 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">国内要闻</h2>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🔴 五一假期出行消费创新高</div>
+      <span class="source-tag">来源：cls / wallstreetcn / 百度</span>
+      <div class="card-text mt-12">
+        交通运输部数据显示，五一假期全社会跨区域人员流动量预计达15.2亿人次，创历史同期新高。其中假期第三天单日跨区域人员流动量预计超2.9亿人次。各地文旅市场以品质供给、文化赋能、服务升级为抓手，推动"流量"变"留量"——游客不再只是打卡拍照，而是深度停留消费。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源待验证</span>
+      <div class="card-title">🟠 主要产油国宣布6月增产</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        OPEC+发表声明，沙特、俄罗斯、伊拉克、科威特等七国决定在2023年4月宣布的额外自愿减产基础上，计划从6月起将产量提高18.8万桶/日。此举正值全球能源市场因霍尔木兹紧张局势而波动之际。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟠 中国已是联合国实际第一会费分摊国</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        中国担任联合国安理会轮值主席期间，常驻代表傅聪表示，由于美国长期拖欠会费，中国已成为事实上的联合国第一会费分摊国。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 国羽汤姆斯杯第12冠、尤伯杯亚军</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        北京时间5月4日，2026汤姆斯杯决赛，中国3-1法国，夺得第12个冠军。同日尤伯杯决赛，中国1-3不敌韩国获亚军。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 国产超跑496公里/时，全球限量30台秒罄</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        2026北京车展期间，一台千万级国产纯电"超跑"在北京车展E3展馆亮相，最高实测车速达496.22公里/小时，全球限量发售30台，迅速全部预订。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 斯诺克世锦赛：吴宜泽10-7领先墨菲</div>
+      <span class="source-tag">来源：百度</span>
+      <div class="card-text mt-12">
+        斯诺克世锦赛决赛，吴宜泽打出单杆82、103、89、66、91分，半场10-7领先肖恩·墨菲，第二阶段结束后10-7领先。
+      </div>
+    </div>
+  </div>
+
+  <!-- 科技前沿 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">科技前沿</h2>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🔴 AI巨头融资与竞争白热化</div>
+      <div class="card-text mt-12">
+        <strong>Anthropic 9000亿美元估值融资轮推进中</strong><br>
+        <span class="source-tag">来源：TechCrunch / Axios / 彭博</span><br>
+        Anthropic正推进约500亿美元的新一轮融资，估值有望突破9000亿美元。据知情人士透露，投资人需在48小时内提交申购意向，该轮融资可能在两周内完成。目前Anthropic已在企业收入层面超越OpenAI，但整体规模仍落后。
+      </div>
+      <div class="card-text mt-12">
+        <strong>OpenAI发布GPT-5.5-Cyber</strong><br>
+        <span class="source-tag">来源：纽约时报 / tavily</span><br>
+        OpenAI推出GPT-5.5-Cyber，专为网络安全任务设计。Sam Altman表示该模型将比Anthropic同类竞品发布范围更广。ChatGPT目前周活用户已超9亿，月收入达20亿美元。
+      </div>
+      <div class="card-text mt-12">
+        <strong>Qualcomm因OpenAI合作传闻大涨</strong><br>
+        <span class="source-tag">来源：Yahoo Finance / tavily</span><br>
+        高通因媒体报道OpenAI正与其及联发科联合开发AI手机处理器（预计2028年量产）而股价大涨。
+      </div>
+      <div class="card-text mt-12">
+        <strong>Google Gemini反超，Alphabet夺回市场份额</strong><br>
+        <span class="source-tag">来源：Axios</span><br>
+        Google的Gemini模型在多任务上超越OpenAI，Alphabet从OpenAI的消费者业务中夺回市场份额，投资人对其现金牛更有信心。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🟠 AI Agent创业公司获大额融资</div>
+      <div class="card-text mt-12">
+        <strong>Parallel Web Systems：估值20亿美元B轮</strong><br>
+        <span class="source-tag">来源：TechCrunch</span><br>
+        前Twitter CEO Parag Agrawal创办的AI agent-tool公司Parallel Web Systems获Sequoia领投1亿美元B轮，估值20亿美元，距离上次大额融资仅5个月。
+      </div>
+      <div class="card-text mt-12">
+        <strong>Legora：Nvidia+Atlassian联手投资，估值56亿</strong><br>
+        <span class="source-tag">来源：彭博/CNBC</span><br>
+        AI法律科技公司Legora获Nvidia venture和Atlassian 5000万美元D轮扩展投资，估值达56亿美元。
+      </div>
+      <div class="card-text mt-12">
+        <strong>Rogo：金融AI融资1.6亿美元D轮</strong><br>
+        <span class="source-tag">来源：FinTech Futures</span><br>
+        金融AI公司Rogo获Kleiner Perkins领投1.6亿美元D轮，用于开发AI代理Felix。
+      </div>
+      <div class="card-text mt-12">
+        <strong>SoftBank：创建数据中心机器人公司，目标1000亿美元IPO</strong><br>
+        <span class="source-tag">来源：TechCrunch</span><br>
+        软银正在创建一家专门建造数据中心的机器人公司，目标是1000亿美元估值的IPO。
+      </div>
+      <div class="card-text mt-12">
+        <strong>BMW i Ventures：3亿美元汽车AI基金</strong><br>
+        <span class="source-tag">来源：MLQ.ai</span><br>
+        宝马旗下风投宣布第三只基金，规模3亿美元，聚焦AIagent、物理AI和自动驾驶早期项目。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🟠 AI安全与监管动态</div>
+      <div class="card-text mt-12">
+        <strong>美英澳联合警告Agentic AI风险</strong><br>
+        <span class="source-tag">来源：Bloomberg Law</span><br>
+        美国、英国、澳大利亚三国网络安全机构联合发布报告，警告企业部署AI agent面临的系统性风险，包括身份安全、数据泄露和运营中断。
+      </div>
+      <div class="card-text mt-12">
+        <strong>科罗拉多州重写全美首个AI法律</strong><br>
+        <span class="source-tag">来源：Axios / Forbes</span><br>
+        科罗拉多州议员计划废除并重写2024年通过的AI法案，新草案聚焦自动化决策对就业、住房、信贷、保险、医疗和政务的影响，旨在平衡消费者保护与行业诉求。
+      </div>
+      <div class="card-text mt-12">
+        <strong>22岁开发者逆向工程Claude Mythos</strong><br>
+        <span class="source-tag">来源：Forbes</span><br>
+        22岁的Kye Gomez在不到两周内逆向分析了Anthropic最强AI模型Claude Mythos的核心设计，并发布OpenMythos开源项目，引发AI开源社区热议。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 苹果iOS 27将重心全面转向AI</div>
+      <span class="source-tag">来源：ithome</span>
+      <div class="card-text mt-12">
+        苹果iOS 27将AI作为核心升级方向，Siri将作为独立App并深度整合到相机应用中。苹果新任CEO特努斯正筹划改变现金策略，并购与研发投入有望加码。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 黄仁勋：英伟达中国市场份额已降为零</div>
+      <span class="source-tag">来源：ithome</span>
+      <div class="card-text mt-12">
+        英伟达CEO黄仁勋在公开场合表示，受美国出口管制影响，英伟达在中国大陆的市场份额已降至接近零。他同时警告此举"效果适得其反"。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 马斯克xAI算力利用率仅11%</div>
+      <span class="source-tag">来源：ithome</span>
+      <div class="card-text mt-12">
+        xAI拥有约55万张英伟达GPU，但算力利用率仅约11%，而Meta和谷歌可达43-46%，引发业界对大规模AI基础设施效率的讨论。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 超维动力发布全球最高自由度人形机器人</div>
+      <span class="source-tag">来源：ithome</span>
+      <div class="card-text mt-12">
+        中国超维动力发布KAI人形机器人，115自由度（全球最高），身高173厘米、体重70公斤，全身覆盖18000个触觉传感点。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 美光CEO：AI仍处早期，DRAM/NAND供应吃紧</div>
+      <span class="source-tag">来源：ithome</span>
+      <div class="card-text mt-12">
+        美光科技CEO表示，AI仍处于"早期阶段"，DRAM内存和NAND闪存供应持续吃紧，供需缺口尚未缓解。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 Pentagon与OpenAI、Nvidia签署AI合同</div>
+      <span class="source-tag">来源：tavily / Forbes</span>
+      <div class="card-text mt-12">
+        五角大楼已与OpenAI、Nvidia等公司签署AI合作协议，反映出美国军方对AI技术的重视程度持续上升。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟡 AI胰腺癌早筛重大突破</div>
+      <span class="source-tag">来源：NDTV / tavily</span>
+      <div class="card-text mt-12">
+        AI系统REDMOD可在CT扫描中提前3年检出胰腺癌，检出率是专业医生的两倍，代表AI在医疗诊断领域的重大突破。
+      </div>
+    </div>
+  </div>
+
+  <!-- 经济观察 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">经济观察</h2>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🟠 亚太股市：韩国KOSPI创历史新高</div>
+      <span class="source-tag">来源：wallstreetcn / cls / jin10</span>
+      <div class="card-text mt-12">
+        5月4日周一，韩国KOSPI指数开盘涨2.7%至6777.12点，创纪录新高，三星电子涨3%。同日澳大利亚ASX200微涨0.03%。日本股市因假期休市。港股方面，泡泡玛特、康方生物小幅波动。
+      </div>
+      <div class="card-text mt-12">
+        A股热门股：寒武纪(+20%)、盛合晶微(+11.35%)、盛新锂能(+9.99%)、天齐锂业(+5.97%)；小米(-3.72%)、比亚迪(-2.3%)、腾讯(-2.38%)。
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <span class="verification-badge verification-multi">多源确认</span>
+      <div class="card-title">🟠 美联储6月维持利率不变概率92.8%</div>
+      <span class="source-tag">来源：jin10 / cls</span>
+      <div class="card-text mt-12">
+        据CME"美联储观察"，6月维持利率不变概率为92.8%，降息25个基点概率7.2%。7月降息概率10.9%。美联储威廉姆斯将于次日凌晨发表讲话。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="verification-badge verification-single">单源</span>
+      <div class="card-title">🟠 港股公告精选</div>
+      <span class="source-tag">来源：gelonghui</span>
+      <div class="card-text mt-12">
+        • 奇瑞汽车4月销量23.64万辆，同比增27%<br>
+        • 亿华通2025年净亏损6.18亿元，5月4日起复牌<br>
+        • ASMPT拟1.2亿美元剥离NEXX业务，聚焦后端封装主业<br>
+        • 黄河实业拟收购Slencor AI 40%股权
+      </div>
+    </div>
+  </div>
+
+  <!-- 热榜精选 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">热榜精选</h2>
+    </div>
+    <div class="note mb-12">
+      来源：百度 / ithome，筛选有价值的非娱乐热点
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">1. 7省份推动带薪休假落地</div>
+      <div class="list-desc">云南、浙江、贵州等至少7个省份出台带薪错峰休假措施，领导干部带头休假，纳入常态化监督。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">2. 2026北京车展闭幕，128万人次入场</div>
+      <div class="list-desc">本届北京车展刷新全球规模纪录。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">3. 比亚迪大唐EV到店，预售25万起</div>
+      <div class="list-desc">比亚迪王朝网首款D级旗舰SUV，纯电版本。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">4. 国产超跑496km/h限量30台秒罄</div>
+      <div class="list-desc">千万级纯电超跑北京车展亮相即售罄。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">5. 中国已是联合国实际第一会费分摊国</div>
+      <div class="list-desc">美国长期拖欠会费，中国已成事实第一分摊国。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">6. 中国在埃及米娜宫饭店建立纪念碑</div>
+      <div class="list-desc">纪念《开罗宣言》80周年，确认台湾是中国不可分割领土的历史法理依据。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">7. Steam 4月硬件调查：RTX 5050首次单独列出</div>
+      <div class="list-desc">RTX 5050成为Steam调查中最受关注的显卡型号之一。</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">8. 红果短剧回应VIP付费争议</div>
+      <div class="list-desc">称仅适用于极少量版权方要求的内容，非新增功能。</div>
+    </div>
+  </div>
+
+  <!-- 本周重要财经日历 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2 class="section-title">本周重要财经日历</h2>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周一</div>
+      <div class="list-desc">法/德/欧元区4月制造业PMI终值；美国3月工厂订单</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周二</div>
+      <div class="list-desc">澳洲联储利率决定；美国4月ISM非制造业PMI；沙特阿美公布官方售价</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周三</div>
+      <div class="list-desc">中国4月服务业PMI；央行开展3000亿元买断式逆回购</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周四</div>
+      <div class="list-desc">美国4月挑战者裁员、失业金初请；中国4月外汇储备</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周五（重点）</div>
+      <div class="list-desc">美国4月非农报告；中国4月贸易帐；美联储威廉姆斯讲话</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">周六</div>
+      <div class="list-desc">普京将在胜利日阅兵式发表重要讲话</div>
+    </div>
+  </div>
+
+  <!-- 数据来源说明 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">8</span>
+      <h2 class="section-title">数据来源说明</h2>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">全球资讯</div>
+      <div class="list-desc">tavily-search</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">热榜（中文）</div>
+      <div class="list-desc">百度热搜、新闻now（wallstreetcn/cls/ithome/gelonghui/xueqiu/jin10）</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">AI新闻</div>
+      <div class="list-desc">tavily多维搜索（10次，覆盖6个维度）</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">财经参考</div>
+      <div class="list-desc">jin10 MCP（金十数据）、gelonghui港股公告</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">多源验证</div>
+      <div class="list-desc">tavily + newsnow 交叉对照</div>
+    </div>
+
+    <div class="list-item">
+      <div class="list-title">本次采集</div>
+      <div class="list-desc">tavily 10次搜索 + newsnow 7个平台 + 金十快讯44条</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">📅 早报生成时间：2026-05-04 08:30 | Agent: news-agent</div>
+  </div>
+
+</div>
+</body>
+</html>
