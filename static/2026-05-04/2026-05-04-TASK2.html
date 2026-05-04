@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-04 财经早盘新闻</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Source tag */
+.source-tag {
+  display: inline-block;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* Link */
+a {
+  color: #667eea;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-04 · 财经早盘新闻</span>
+    <h1 class="cover-title">🌅 盘前核心：<br>资金主线与政策窗口</h1>
+    <p class="cover-subtitle">亚洲制造业景气回升，主力资金大级别调仓确认，915亿设备更新资金下达覆盖16领域，五一后政策红利密集落地窗口临近。</p>
+    <div class="tag-row">
+      <span class="tag">亚洲PMI超预期</span>
+      <span class="tag">主力资金调仓</span>
+      <span class="tag">政策红利窗口</span>
+    </div>
+  </div>
+
+  <!-- 盘前核心摘要 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">盘前核心摘要</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">【海外宏观】亚洲制造业景气普遍回升</div>
+      <div class="card-text">韩国/台湾PMI均超预期，但特朗普威胁本周对欧盟输美汽车加征25%关税，全球贸易摩擦升温，中长期压制出口链预期。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">【产业资金】4月主力资金大级别调仓确认</div>
+      <div class="card-text">AI/半导体高位分化（寒武纪、北方华创获重仓），CPO光模块内部分化（中际旭创获11亿净流入、新易盛被抛售5亿），锂电/新能源获底部加仓（宁德时代、比亚迪逆势吸筹）。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">【政策主线】915亿设备更新资金下达</div>
+      <div class="card-text">覆盖工业母机/机器人/半导体等16领域，五一后政策红利密集落地窗口临近，算力、半导体、高端制造三大主线资金已提前埋伏。</div>
+    </div>
+  </div>
+
+  <!-- jin10 行情与快讯 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">jin10 行情与快讯</h2>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">■ 隔夜国际市场核心数据</div>
+      <span class="source-tag">来源：jin10</span>
+      <div class="card-text mt-12">
+        <strong>大宗商品与外汇：</strong><br>
+        现货黄金(XAUUSD)：4608.90美元/盎司，跌0.22%（-9.95美元），亚盘时间09:02报价<br>
+        WTI原油(USOIL)：102.33美元/桶，涨0.18%（+0.18美元），亚盘时间09:03报价<br>
+        欧元/美元(EURUSD)：1.17234，涨0.03%，亚盘时间09:03报价<br>
+        <em>注：美元指数DXY品种暂不支持，需通过其他渠道获取</em>
+      </div>
+      <div class="card-text mt-12">
+        <strong>全球主要市场动态：</strong><br>
+        • 韩国KOSPI指数：5月4日开盘大涨2.7%至6777.12点，触及历史新高；三星电子涨3%<br>
+        • 澳大利亚ASX200：开盘微涨0.03%至8732.20点<br>
+        • 英美市场周五（5月2日）因假期休市，数据截取至5月1日收盘
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">■ 当日财经日历</div>
+      <span class="source-tag">来源：jin10</span>
+      <div class="card-text mt-12">
+        <strong>已公布数据（利多/利空标注）：</strong><br>
+        • 中国台湾4月日经制造业PMI：55.3（前值53.3）→ <span class="good">利多</span><br>
+        • 韩国4月汇丰制造业PMI：53.6（前值52.6）→ <span class="good">利多</span><br>
+        • 越南4月标普全球越南制造业PMI：50.5（前值51.2）→ <span class="bad">利空</span>
+      </div>
+      <div class="card-text mt-12">
+        <strong>本周关键待公布数据：</strong><br>
+        • 【5月4日 周一】美国3月工厂订单月率（预期+0.5%，前值0.0%，★★★）<br>
+        • 【5月5日 周二】澳洲联储利率决定（预期4.35%，前值4.10%，★★★）<br>
+        • 【5月6日 周三】中国4月RatingDog服务业PMI（预期52，前值52.1，★★★）；美国4月ADP就业（预期+9.9万，前值+6.2万，★★★★）<br>
+        • 【5月8日 周五】美国4月非农就业人口（预期+6万，前值+17.8万，★★★★★）；中国4月贸易帐（★★★）；美国4月失业率（预期4.30%，前值3.50%，★★★★★）
+      </div>
+      <div class="card-text mt-12">
+        <strong>政策/风险事件：</strong><br>
+        • 特朗普威胁本周对欧盟输美汽车加征25%关税（周一快讯确认）<br>
+        • 央行将开展3000亿元3个月期买断式逆回购操作（周三）<br>
+        • 普京将在5月9日胜利日阅兵式发表重要讲话
+      </div>
+    </div>
+  </div>
+
+  <!-- 金十快讯整理 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">金十快讯整理（按时间倒序）</h2>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">【产业政策】</div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:19</div>
+        <div class="timeline-content">中房报：努力稳定楼市要打好"提前量"，住房以旧换新政策推进，加大存量商品房转化为保障性住房资金支持<br><a href="https://flash.jin10.com/detail/20260504081900649800" target="_blank">查看原文</a></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:26</div>
+        <div class="timeline-content">中钢协：4月下旬21个城市5大品种钢材社会库存1022万吨，环比减少38万吨（-3.6%），库存持续下降<br><a href="https://flash.jin10.com/detail/20260504082610122800" target="_blank">查看原文</a></div>
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">【海外重大并购】</div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:41</div>
+        <div class="timeline-content">游戏驿站(GME.N)提出以约560亿美元收购eBay(EBAY.O)，报价125美元/股（50%现金+50%普通股），较eBay上周五收盘价溢价约20%；GME已持有eBay约5%股份；如被拒，科恩表示将发起代理权争夺战<br><a href="https://flash.jin10.com/detail/20260504084137136800" target="_blank">查看原文</a></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:49</div>
+        <div class="timeline-content">游戏驿站(GME)：CEO科恩将不领取任何薪水，报酬完全与合并后公司业绩挂钩<br><a href="https://flash.jin10.com/detail/20260504084931291800" target="_blank">查看原文</a></div>
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">【地缘风险】</div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:11</div>
+        <div class="timeline-content">英国海上贸易行动办公室(UKMTO)：收到阿联酋富贾伊拉以北78海里油轮被不明飞行物击中报告，船员均安全<br><a href="https://flash.jin10.com/detail/20260504081137303800" target="_blank">查看原文</a></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:35</div>
+        <div class="timeline-content">伊朗外长与阿曼外交大臣通话，讨论美伊谈判；巴基斯坦致力于推动各方和平对话<br><a href="https://flash.jin10.com/detail/20260504083527163800" target="_blank">查看原文</a></div>
+      </div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">【科技/资本动态】</div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:31</div>
+        <div class="timeline-content">机器人初创企业灵心巧手(Linkerbot)拟新一轮融资寻求60亿美元估值，为上一轮的两倍<br><a href="https://flash.jin10.com/detail/20260504083134115800" target="_blank">查看原文</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">【区域经济】</div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:50</div>
+        <div class="timeline-content">长三角铁路5月4日预计发送旅客402万人次，同比增加2.3万；五一假期(4/29-5/3)累计发送1997.1万人次<br><a href="https://flash.jin10.com/detail/20260504085036423800" target="_blank">查看原文</a></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">08:02</div>
+        <div class="timeline-content">韩国KOSPI指数开盘涨2.7%至6777.12点，创历史新高；三星电子涨3%<br><a href="https://flash.jin10.com/detail/20260504080207834800" target="_blank">查看原文</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mx-data / mx-search 行情与资讯 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">mx-data / mx-search 行情与资讯</h2>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">■ mx-data A股主要指数行情</div>
+      <div class="note mb-12">数据截至4月30日收盘；5月4日A股因五一假期休市</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>指数</th><th>最新点位</th><th>涨跌幅</th><th>区间成交量</th><th>区间成交额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>上证</td><td>—</td><td class="good">+0.1131%</td><td>656.9亿手</td><td>1.276万亿元</td></tr>
+            <tr><td>深证</td><td>—</td><td class="bad">-0.0884%</td><td>737.7亿手</td><td>1.465万亿元</td></tr>
+            <tr><td>创业板</td><td>—</td><td class="bad">-0.2717%</td><td>208.0亿手</td><td>6417亿元</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">注：五一假期（5月1日-5月4日）A股休市，5月5日（周二）正常休市，5月6日（周三）恢复交易。当前数据为4月30日收盘数据，反映节前最后交易日状况。</div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">■ mx-search 核心资讯</div>
+      <div class="card-text">
+        <strong>资金流向关键数据：</strong><br><br>
+        <strong>近5日主力净流入TOP个股</strong>（来源：东方财富/21世纪经济报道）：<br>
+        • 中国长城：主力净流入39.51亿元，5日涨幅22.42%，人气龙头<br>
+        • 寒武纪：主力净流入42亿+，股价接近1700元涨停<br>
+        • 北方华创：主力净流入23.97亿元<br>
+        • 天齐锂业：主力净流入19.74亿元<br>
+        • 北方稀土：主力净流入超16亿元<br>
+        • 比亚迪：主力净流入超16亿元<br>
+        • 宁德时代：逆势加仓13.19亿元（5日微跌0.66%）<br>
+        • 中际旭创(CPO)：主力净流入11.57亿元，4月30日涨势突出
+      </div>
+      <div class="card-text mt-12">
+        <strong>CPO板块内部分化</strong>（4月30日数据）：<br>
+        • 中际旭创：+11.57亿净流入，强势<br>
+        • 光迅科技：+5.23亿净流入，涨8.59%<br>
+        • 新易盛：-5.12亿净流出，跌2.09%<br>
+        • 工业富联：-18.65亿净流出
+      </div>
+      <div class="card-text mt-12">
+        <strong>主力持续净流出板块：</strong><br>
+        煤炭、油气、传统电力（神华、中石油、长江电力等）
+      </div>
+      <div class="card-text mt-12">
+        主力大幅净买入超3亿个股43只，重点集中方向：半导体、计算机设备、消费电子、商业航天、卫星导航
+      </div>
+      <div class="card-text mt-12">
+        <strong>科创板新股联讯仪器：</strong>5日涨幅1162%，主力净流入26.84亿元，股价突破1000元，成为A股史上第九只千元股
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">赛道动态与景气验证</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>赛道</th><th>景气验证</th><th>资金验证</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>硬科技（AI算力+半导体）</strong></td>
+              <td>AI服务器、光模块、液冷设备订单爆满，一季度净利润同比增200%+；半导体设备/材料/存储芯片国产替代加速，供需缺口扩大价格上涨</td>
+              <td>4月主力净流入超300亿，北向连续10日加仓</td>
+            </tr>
+            <tr>
+              <td><strong>算电协同（算力+电力）</strong></td>
+              <td>智算中心加速投产，AI服务器出货量同比增169%；液冷需求爆发；储能、特高压、虚拟电厂受益夏季用电高峰</td>
+              <td>单周净流入320亿，社保养老金加仓</td>
+            </tr>
+            <tr>
+              <td><strong>高端制造（工业母机+机器人）</strong></td>
+              <td>特斯拉2026年人形机器人产量目标5万台以上（2025年数千台）；比亚迪"智驾平权"</td>
+              <td>915亿设备更新资金下达，覆盖工业母机、机器人、新能源、半导体等16领域（5月1日）</td>
+            </tr>
+            <tr>
+              <td><strong>锂电/新能源</strong></td>
+              <td>联讯仪器Q1营收4.88亿元(+142.52%)，净利润1.19亿元(+515.17%)</td>
+              <td>近5日主力大举涌入，宁德时代、比亚迪逆势加仓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-text mt-12">
+        <strong>宏观与政策：</strong><br>
+        • 软件业Q1收入3.49万亿元(+11.6%)，云计算大数据服务4073亿元(+13.1%)<br>
+        • 智能算力市场规模突破1300亿元（中国信通院报告，4月30日）<br>
+        • 半导体：SEMI预测2026年全球半导体市场9750亿美元(+26.3%)；2025年全球半导体设备销售额1351亿美元(+15%)，连续第三年创历史新高<br>
+        • 人形机器人：2026年被视为规模化量产与商业化落地元年
+      </div>
+    </div>
+  </div>
+
+  <!-- 中长线展望 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">中长线展望</h2>
+    </div>
+
+    <div class="card mb-12">
+      <div class="card-title">下一阶段核心观察点</div>
+      <div class="card-text">
+        <strong>1. 宏观变量：</strong>周五美国4月非农数据（预期+6万，★★5）将直接影响美联储降息预期；若数据超预期可能强化美元，对新兴市场流动性形成压力；同时关注周二澳洲联储利率决定（是否降息）。
+      </div>
+      <div class="card-text mt-12">
+        <strong>2. 产业政策：</strong>915亿设备更新资金已下达，五一后首周（5月6日）相关产业链（工业母机/机器人/半导体设备）或有政策催化落地；4月28日政治局会议"稳定资本市场+新质生产力"定调延续，政策红利释放节奏值得跟踪。
+      </div>
+      <div class="card-text mt-12">
+        <strong>3. 赛道景气度先行指标：</strong><br>
+        • 算力/AI：继续跟踪AI服务器订单交付数据、光模块厂商Q2指引；关注CPO板块内部筹码是否进一步集中（中际旭创vs新易盛分化已现）<br>
+        • 半导体：国产替代设备订单是核心跟踪指标；关注中芯国际、北方华创等龙头的设备交付节奏<br>
+        • 新能源/锂电：宁德时代、比亚迪的订单与排产数据；碳酸锂价格走势<br>
+        • 高端制造/人形机器人：特斯拉机器人量产进度；国内政策补贴落地情况
+      </div>
+      <div class="card-text mt-12">
+        <strong>4. 资金面信号：</strong>节后首个交易日（5月6日）关注主力资金回流方向与成交量能变化；若出现高位放量滞涨信号需警惕获利了结压力。
+      </div>
+    </div>
+  </div>
+
+  <!-- 中长期风险提示 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">中长期风险提示</h2>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">■ 宏观风险</div>
+      <div class="highlight-text">
+        • 美联储降息节奏反复：若非农数据超预期，美元可能再度走强，对A股北向资金及流动性预期形成压制<br>
+        • 全球贸易摩擦升级：特朗普威胁对欧盟汽车加征25%关税，若落地将冲击全球汽车产业链及半导体出口预期<br>
+        • 地缘政治扰动：中东油轮事件、美伊谈判进展存不确定性，油价波动可能传导至化工/航运等顺周期板块
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">■ 产业风险</div>
+      <div class="highlight-text">
+        • AI/半导体高估值压力：科创50自3月低点累计涨幅超50%，部分个股市盈率突破200倍；一季报业绩若不及估值涨幅，调整风险较大<br>
+        • 资金调仓风险：高位AI/半导体板块获利盘丰厚，主力兑现意愿强；五一假期后首个交易日若高开，可能引发集中抛压<br>
+        • CPO板块内部分化：部分个股主力资金持续净流出（新易盛、工业富联），需警惕伪龙头杀跌风险
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">■ 资金面风险</div>
+      <div class="highlight-text">
+        • 杠杆资金高位累积：两融余额14连增，融资杠杆资金在高位聚集，一旦市场波动加剧可能引发连锁止损<br>
+        • 散户接盘风险：4月最后一周主力净流出780亿而散户逆势净流入1447亿，历史上类似背离往往伴随分化调整<br>
+        • 外资流向反复风险：北向资金尾盘异动需观察是主动做多还是被动配置后的小幅修复
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">■ 政策风险</div>
+      <div class="highlight-text">
+        • 产业补贴退坡风险：若半导体/新能源等板块政策补贴节奏放缓，高资本开支赛道的盈利预测面临下修<br>
+        • 汇率波动风险：人民币汇率若出现较大波动，将直接影响出口链（半导体设备、光伏等）业绩预期
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">数据来源：jin10（https://flash.jin10.com），东方财富妙想数据，21世纪经济报道，wind，SEMI，中国信通院，中钢协</div>
+    <div class="footer-text mt-12">注：A股5月1日-4日休市，5月5日正常休市，5月6日（周三）恢复交易。本报告中"今日"为2026年5月4日（周日），为五一假期最后一日，实际市场数据为4月30日收盘数据。</div>
+    <div class="footer-text mt-12">市场有风险，投资需谨慎。</div>
+  </div>
+
+</div>
+</body>
+</html>
