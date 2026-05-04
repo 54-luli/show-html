@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-05-04 上午盘行情分析</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fafafa;
+  color: #111111;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.section {
+  padding: 32px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.section:last-child { border-bottom: none; }
+
+/* Header / Cover */
+.cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-num {
+  display: inline-block;
+  background: #667eea;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-title {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Cards */
+.card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.7;
+}
+.card-accent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+.card-accent .card-title { color: #ffffff; }
+.card-accent .card-text { color: rgba(255,255,255,0.9); }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 500px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eeeeee;
+}
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+td { color: #555555; }
+.good { color: #17b26a; font-weight: 600; }
+.bad { color: #f04438; font-weight: 600; }
+.warn { color: #f79009; font-weight: 600; }
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.timeline-time {
+  flex-shrink: 0;
+  width: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #667eea;
+}
+.timeline-content {
+  flex: 1;
+  font-size: 14px;
+  color: #333333;
+}
+.timeline-link {
+  font-size: 12px;
+  color: #667eea;
+  text-decoration: none;
+  display: block;
+  margin-top: 4px;
+}
+.timeline-link:hover {
+  text-decoration: underline;
+}
+
+/* Pills */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+.pill-good { background: #e6f7ed; color: #17b26a; }
+.pill-bad { background: #fef2f2; color: #f04438; }
+.pill-warn { background: #fff7ed; color: #f79009; }
+
+/* Metrics */
+.metric-row {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+}
+.metric-label {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 4px;
+}
+.metric-good .metric-value { color: #17b26a; }
+.metric-bad .metric-value { color: #f04438; }
+
+/* List */
+.list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.list-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+}
+.list-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-left: 4px solid #f79009;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.highlight-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+.highlight-text {
+  font-size: 14px;
+  color: #7c2d12;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-text {
+  font-size: 13px;
+  color: #888888;
+}
+.footer-path {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* Note */
+.note {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 3px solid #dddddd;
+}
+
+/* Emoji inline */
+.emoji { font-style: normal; }
+
+/* Text utilities */
+.text-sm { font-size: 13px; }
+.text-dim { color: #888888; }
+.text-bold { font-weight: 600; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Cover -->
+  <div class="cover">
+    <span class="cover-tag">2026-05-04 · 上午盘行情分析</span>
+    <h1 class="cover-title">📊 上午盘行情分析<br>A股休市第4天</h1>
+    <p class="cover-subtitle">报告时间: 2026-05-04 11:55（周六）｜港股正常交易<br>数据来源: jin10、mx-search（港股/美股/大宗商品实时行情）、东方财富资讯</p>
+    <div class="tag-row">
+      <span class="tag">恒生科技大涨3.66%</span>
+      <span class="tag">纳指突破25000点</span>
+      <span class="tag">A股5月6日复盘</span>
+    </div>
+  </div>
+
+  <!-- 上午盘核心结论 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2 class="section-title">上午盘核心结论</h2>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title">A股5月6日复盘预期偏积极</div>
+      <div class="card-text">五一期间全球风险偏好显著回升，恒生科技大涨3.66%重返5000点，富时A50夜盘涨1.8%，纳指突破25000点创历史新高，外围暖风为A股开门红铺垫良好基础。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">科技成长赛道中期逻辑持续强化</div>
+      <div class="card-text">小米汽车4月交付3万辆（环比+50%）再超预期、潍柴数据中心发电产品收入同比+240%印证AI算力需求爆发，港股半导体/光模块/AI软件板块五一期间持续强势，资金对科技成长赛道的共识正在深化。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">地缘风险呈现"外冷内稳"特征，美伊谈判反复但市场已逐步钝化</div>
+      <div class="card-text">伊朗霍尔木兹海峡表态强硬（WTI原油涨1.1%至103.27美元/桶），但澳新银行已给出"Q2库存降幅创历史新高、布油2027年或破100美元"的路径预判，能源价格中期支撑逻辑成立；同时全球科技资产持续新高表明市场风险偏好并未因地缘出现系统性收缩。</div>
+    </div>
+  </div>
+
+  <!-- jin10 行情与快讯 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2 class="section-title">jin10 行情与快讯</h2>
+    </div>
+    <div class="card-title">实时国际品种数据（来源：jin10，11:50 CST）</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>品种</th><th>最新价格</th><th>涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>现货黄金(XAUUSD)</td><td>4610.20 美元/盎司</td><td class="bad">-0.19%</td></tr>
+          <tr><td>WTI原油(USOIL)</td><td>103.27 美元/桶</td><td class="good">+1.10%</td></tr>
+          <tr><td>欧元/美元(EURUSD)</td><td>1.17322</td><td class="good">+0.11%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card-title mt-16">盘中重要资讯（来源：jin10快讯，5月4日，按时间倒序）</div>
+    <div class="timeline-item">
+      <div class="timeline-time">11:20</div>
+      <div class="timeline-content">
+        伊媒：伊朗方案中未含冻结铀浓缩15年条款，与此前半岛电视台报道不符，霍尔木兹前景再度模糊
+        <a href="https://flash.jin10.com/detail/20260504112036351800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">10:59</div>
+      <div class="timeline-content">
+        伊朗议会副议长：霍尔木兹海峡不会回到战前状态，议会将批准"霍尔木兹海峡管理法"（永久禁止以色列船只通行、敌对国家船只须付"战争赔偿金"）
+        <a href="https://flash.jin10.com/detail/20260504105904989800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">11:10</div>
+      <div class="timeline-content">
+        港股科网股集体走强：小米集团+8%+、阿里巴巴+6%+、百度+5%+、中芯国际+4%+
+        <a href="https://flash.jin10.com/detail/20260504111015275800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">11:07</div>
+      <div class="timeline-content">
+        澳大利亚总理与日本签署经济安全合作联合声明，将关键矿产合作提升至核心支柱地位
+        <a href="https://flash.jin10.com/detail/20260504110657130800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">11:06</div>
+      <div class="timeline-content">
+        澳新银行：布伦特原油2027年有可能突破100美元/桶；石油市场Q2库存下降幅度将创历史新高
+        <a href="https://flash.jin10.com/detail/20260504110643764800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">10:57</div>
+      <div class="timeline-content">
+        广州楼市"穗八条"落地：五一假期首两日新房来访同比+12%、认购+37%，二手房连续两个月网签破万套，市场明显回暖
+        <a href="https://flash.jin10.com/detail/20260504105726409800" class="timeline-link" target="_blank">查看详情</a>
+      </div>
+    </div>
+    
+    <div class="card-title mt-16">五一假期重要宏观政策/数据回顾</div>
+    <div class="list-item">
+      <div class="list-title">4月中国制造业PMI 52.2</div>
+      <div class="list-desc">连续第5个月处于扩张区间，财新制造业PMI升至52.2，官方与财新双验证经济企稳</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">2026年第二批915亿元超长期特别国债支持设备更新资金已经下达</div>
+      <div class="list-desc">财政扩张持续落地</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">DeepSeek-V4预览版正式上线并同步开源</div>
+      <div class="list-desc">预计下半年昇腾950超节点批量上市后V4-Pro模型价格大幅下调</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">三大交易所同步优化交易机制</div>
+      <div class="list-desc">上交所盘后固定价格交易扩至全部A股；深交所创业板引入做市商制度、大宗交易实时成交确认扩大范围</div>
+    </div>
+  </div>
+
+  <!-- 港股行情 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2 class="section-title">港股行情（5月4日实时）</h2>
+    </div>
+    <div class="card-title">恒生指数与恒生科技</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>开盘</th><th>截至发稿</th><th>涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>恒生指数</td><td>26138.34点</td><td>26316点附近</td><td class="good">+2.09%</td></tr>
+          <tr><td>恒生科技指数</td><td>4948.43点</td><td>5049~5050点</td><td class="good">+3.66%，重返5000点</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card-title mt-16">港股盘面亮点（来源：jin10快讯 + mx-search）</div>
+    <div class="card mb-12">
+      <div class="card-title">科技/半导体领涨</div>
+      <div class="card-text">
+        小米集团(01810)：+8~9%，消息面为4月交付量3万辆（环比+50%，创年度增速新高），新一代SU7锁单超7万台，1-4月累计交付10.9万辆；另小米YU7 GT将于5月底发布（售价45-50万元，1003匹马力）<br><br>
+        天数智芯(09903)：+12~19%，AI芯片港股次新股<br>
+        澜起科技(06809)：+5~9%<br>
+        中芯国际(00772)：+4%+<br>
+        华虹半导体(01347)：+3%+<br>
+        曦智科技（光芯片第一股）：再涨15~20%（上周刚挂牌上市）<br>
+        剑桥科技（光模块/算力硬件）：+10~14%<br>
+        MINIMAX-W(00100)：+7~12%
+      </div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">电力设备</div>
+      <div class="card-text">潍柴动力(02338)：+13~14%，数据中心专用大缸径发动机Q1销量同比+240%，摩根大通上调目标价至52港元</div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">房地产</div>
+      <div class="card-text">万科企业(02202)：+10~12%；贝壳(02423)：+8%；绿景中国、融创中国、世茂集团均涨5%+</div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">可选消费</div>
+      <div class="card-text">阿里巴巴(09988)：+6%+；理想汽车(02015)：+4%+；小鹏汽车(09866)：+3%+</div>
+    </div>
+    <div class="card">
+      <div class="card-title">石油/煤炭调整</div>
+      <div class="card-text">中国海洋石油(00883)：领跌蓝筹之一；煤炭股普遍偏弱</div>
+    </div>
+  </div>
+
+  <!-- 美股与国际市场 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2 class="section-title">美股与国际市场（五一假期）</h2>
+    </div>
+    <div class="list-item">
+      <div class="list-title">纳指站稳25114点（历史性突破25000）</div>
+      <div class="list-desc">实现连续6周收涨；标普500同步刷新历史高位</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">苹果(AAPL) 第二财季营收1111.8亿美元</div>
+      <div class="list-desc">同比+17%，大超预期</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">谷歌(GOOGL) 单日市值暴增4210亿美元</div>
+      <div class="list-desc">创史上第二纪录</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">伯克希尔哈撒韦 Q1运营利润113.5亿美元</div>
+      <div class="list-desc">同比+18%，但现金储备激增至3970亿美元（创纪录新高），巴菲特暗示不急于出手</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">高通(QCOM) 周五大涨超15%</div>
+      <div class="list-desc">——</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">特斯拉 欧洲市场Q1销量回暖</div>
+      <div class="list-desc">涨幅近45%</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">美国Q1 GDP 实际年化季率初值2%</div>
+      <div class="list-desc">3月个人支出环比+0.9%（创2024年12月以来最大增幅）；3月核心PCE环比+0.3%（符合预期）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">特朗普 将对欧盟输美汽车和卡车加征25%关税</div>
+      <div class="list-desc">宣布将引导中立国船只通过霍尔木兹海峡</div>
+    </div>
+  </div>
+
+  <!-- A股最后交易日回顾 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2 class="section-title">A股最后交易日回顾（4月30日）</h2>
+    </div>
+    <div class="card-title">主要指数收盘（来源：jin10）</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指数</th><th>收盘点位</th><th>4月累涨</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上证指数</td><td>4112.16点</td><td class="good">+5.66%</td></tr>
+          <tr><td>深证成指</td><td>——</td><td class="good">4月累涨12.09%</td></tr>
+          <tr><td>创业板指</td><td>——</td><td class="good">+15.45%（创十年新高）</td></tr>
+          <tr><td>科创50</td><td>——</td><td class="good">4月30日单日+4.71%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card-title mt-16">4月30日领涨板块</div>
+    <div class="list-item">
+      <div class="list-title">半导体</div>
+      <div class="list-desc">寒武纪20cm涨停市值破7000亿（年内涨幅超25%，月内超70%）；芯原股份20cm涨停；CPO概念（光迅科技涨停创新高）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">锂矿</div>
+      <div class="list-desc">盛新锂能、融捷股份涨停；德方纳米涨超13%；碳酸锂期货主力合约涨超5%至189200元/吨</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">商业航天</div>
+      <div class="list-desc">万通发展、上海沪工、海昌新材等多股涨停</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">风电设备</div>
+      <div class="list-desc">飞沃科技、金风科技涨超9%</div>
+    </div>
+    
+    <div class="card-title mt-16">4月30日领跌板块</div>
+    <div class="list-item">
+      <div class="list-title">氦气</div>
+      <div class="list-desc">金宏气体跌超11%（此前连日强势后高位兑现）</div>
+    </div>
+    <div class="list-item">
+      <div class="list-title">航运港口、电力、钢铁等周期股</div>
+      <div class="list-desc">普遍调整</div>
+    </div>
+  </div>
+
+  <!-- 核心赛道景气度验证 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2 class="section-title">核心赛道景气度验证（中期逻辑）</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>赛道</th><th>景气验证（4月30日~5月4日最新数据）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AI算力/半导体</td><td>寒武纪Q1净利润同比+185%至10.13亿；芯原1-4月新签订单82.4亿（AI算力相关占比超九成）；天数智芯港股暴涨反映AI芯片需求热度；剑桥科技Q1净利润同比+276%</td></tr>
+          <tr><td>智能汽车</td><td>小米4月交付3万辆环比+50%；零跑4月交付71387台同比+74%；潍柴数据中心发动机收入同比+240%；4月新势力格局：零跑>理想>小米>小鹏</td></tr>
+          <tr><td>新能源（锂电/光伏）</td><td>赣锋锂业Q1净利润同比+616%；天齐锂业Q1同比+1699%；德方纳米4月30日涨超13%；湖南裕能Q1同比+1338%</td></tr>
+          <tr><td>光通信/CPO</td><td>光迅科技涨停创新高；剑桥科技Q1同比+276%；新易盛预计2027年行业维持超高景气</td></tr>
+          <tr><td>房地产链</td><td>广州"穗八条"落地后新房来访+12%、认购+37%；万科H股+10~12%；政治局会议提出"稳定房地产市场、扎实推进城市更新"</td></tr>
+          <tr><td>人形机器人</td><td>格力电器已具备做人形机器人能力；创世纪4月30日20cm涨停</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 中长线展望与风险提示 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2 class="section-title">中长线展望与风险提示</h2>
+    </div>
+    <div class="card-title">下一阶段核心观察点</div>
+    <div class="card mb-12">
+      <div class="card-title">5月6日A股复盘表现</div>
+      <div class="card-text">外围港股/美股五一期间强势，A股开门红概率较高，但需关注高开后的兑现压力</div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">美伊谈判进展（5月非农前）</div>
+      <div class="card-text">5月8日（周五）美国4月非农数据将出（预期+6万，前值+17.8万），若就业数据不及预期，降息预期升温可能利好科技成长；反之美伊谈判若意外破局，能源价格冲击将压制全球风险偏好</div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">AI算力业绩兑现节奏</div>
+      <div class="card-text">5月6日后进入一季报密集期后的真空期，需跟踪订单数据与港股映射效应；DeepSeek-V4开源+下半年昇腾950放量，可能驱动AI算力/半导体板块再度活跃</div>
+    </div>
+    <div class="card mb-12">
+      <div class="card-title">能源价格中期路径</div>
+      <div class="card-text">WTI已达103美元/桶，澳新银行预判Q2库存降幅创历史新高+布油2027年破100美元，能源板块（油气/煤炭）中期支撑逻辑仍在，但短期已反映部分地缘溢价</div>
+    </div>
+    <div class="card">
+      <div class="card-title">楼市政策效果验证</div>
+      <div class="card-text">广州穗八条+深圳优化限购政策密集落地，需跟踪5月高频成交数据能否持续改善</div>
+    </div>
+    
+    <div class="card-title mt-16">中长期风险提示</div>
+    <div class="highlight-box">
+      <div class="highlight-title">宏观/外部风险</div>
+      <div class="highlight-text">美伊谈判反复可能触发原油价格阶段性冲高（输入性通胀风险），进而压制全球流动性预期；特朗普对欧汽车关税升级可能扰动全球贸易链情绪；美国4月非农数据存在不及预期的可能性（当前预期已较高）</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">产业/赛道风险</div>
+      <div class="highlight-text">AI算力赛道经历4月大幅上涨后，拥挤度处于历史高位，一旦业绩兑现不及预期或预期松动，高位筹码可能集中兑现；半导体设备/材料领域，需关注美国对华出口管制升级风险</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">资金面风险</div>
+      <div class="highlight-text">4月30日市场超大单资金净流出2241亿元，主力资金在指数高位出现分歧；伯克希尔现金储备创3970亿美元新高，暗示大型机构对当前估值水平持谨慎态度；A股节后若高开过快，可能触发短线资金高开低走</div>
+    </div>
+    <div class="highlight-box">
+      <div class="highlight-title">地缘与大宗商品风险</div>
+      <div class="highlight-text">霍尔木兹海峡持续受限叠加Q2库存去化超预期，能源价格上行空间打开，对中下游制造/消费板块利润形成压制，需持续跟踪</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">报告生成时间: 2026-05-04 11:55 CST</div>
+    <div class="footer-path">数据来源: jin10快讯API（实时行情/盘中快讯）、东方财富mx-search（港股/资讯）、mx-data（日行情）<br>本报告仅供信息整理，不构成任何投资建议。市场有风险，投资需谨慎。</div>
+  </div>
+
+</div>
+</body>
+</html>
